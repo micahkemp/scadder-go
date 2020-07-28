@@ -1,1 +1,5 @@
 language: go
+
+script:
+  - test -z $(gofmt -l .)
+  - go test -v ./...
