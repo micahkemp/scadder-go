@@ -2,6 +2,7 @@ package scadmodule
 
 import (
 	"fmt"
+	"path"
 	"regexp"
 )
 
@@ -16,4 +17,8 @@ func (s *SCADModule) filename() (filename string, ok bool) {
 	ok = regexp.MustCompile("^[a-z][a-z0-9_]*$").MatchString(s.Name)
 	filename = fmt.Sprintf("%s.scad", s.Name)
 	return
+}
+
+func (s *SCADModule) filepath(outputPath string, filename string) string {
+	return path.Join(outputPath, filename)
 }
