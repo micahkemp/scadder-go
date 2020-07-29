@@ -59,3 +59,7 @@ func TestFilepath(t *testing.T) {
 		}
 	}
 }
+
+func TestSCADModuleIsRenderable(t *testing.T) {
+	var _ Renderer = SCADModule{}
+}
