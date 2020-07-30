@@ -4,13 +4,33 @@ import (
 	"testing"
 )
 
+func TestHasSCADModuleModuleName(t *testing.T) {
+	type hasModule struct {
+		SCADModule
+	}
+
+	hM := hasModule{}
+	testFilename := "hasModule.scad"
+
+	filename, ok := hM.filename()
+	if filename != testFilename {
+		t.Errorf("(*hasModule).filename() filename = %s, want %s",
+			filename,
+			testFilename)
+	}
+
+	if ok != true {
+		t.Errorf("(*hasModule).filename() ok = %v", ok)
+	}
+}
+
 func TestFilename(t *testing.T) {
 	var tests = []struct {
 		name     string
 		filename string
 		ok       bool
 	}{
-		{"", ".scad", false},
+		{"", "SCADModule.scad", true},
 		{"a b", "a b.scad", false},
 		{"1a", "1a.scad", false},
 		{"a-1", "a-1.scad", false},
@@ -33,7 +53,7 @@ func TestFilename(t *testing.T) {
 		}
 
 		if ok != test.ok {
-			t.Errorf("Render{Name: %s}.filname() ok = %v", test.name, ok)
+			t.Errorf("Render{Name: %s}.filename() ok = %v", test.name, ok)
 		}
 	}
 }

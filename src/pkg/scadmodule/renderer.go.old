@@ -1,0 +1,28 @@
+package scadmodule
+
+import (
+	"fmt"
+	"regexp"
+)
+
+type Renderer interface {
+	Render(outputPath string) bool
+	Name() string
+}
+
+// ModuleName is defined on the Renderer interface so that the underlying interface type can be used
+func (r *Renderer) ModuleName() (moduleName string, ok bool) {
+	moduleName = r.Name
+	if moduleName == "" {
+		// default to class name of the calling object
+		// not sure this will work with SCADModule being embedded in another object
+		//typeComponents := strings.Split(fmt.Sprintf("%T", s), ".")
+		//moduleName = typeComponents[len(typeComponents)-1]
+		moduleName = fmt.Sprintf("%T", r.(type))
+	}
+
+	ok = regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$").MatchString(moduleName)
+	return
+}
+
+func rendererTypeName(r renderer)
