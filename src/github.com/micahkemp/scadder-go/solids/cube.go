@@ -2,7 +2,7 @@ package solids
 
 import (
 	"fmt"
-	"beatthehell.net/scadder/renderer"
+	"github.com/micahkemp/scadder-go/renderer"
 	"strconv"
 )
 

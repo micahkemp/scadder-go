@@ -1,6 +1,6 @@
 package component
 
-import "beatthehell.net/scadder/renderer"
+import "github.com/micahkemp/scadder-go/renderer"
 
 type RenderFields interface {
 	Fields() renderer.Fields
