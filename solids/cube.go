@@ -2,7 +2,7 @@ package solids
 
 import (
 	"fmt"
-	"github.com/micahkemp/scadder-go/renderer"
+	"github.com/micahkemp/scad/renderer"
 	"strconv"
 )
 

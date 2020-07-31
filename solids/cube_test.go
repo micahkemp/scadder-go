@@ -1,8 +1,8 @@
 package solids
 
 import (
-	"github.com/micahkemp/scadder-go/component"
-	"github.com/micahkemp/scadder-go/renderer"
+	"github.com/micahkemp/scad/component"
+	"github.com/micahkemp/scad/renderer"
 	"testing"
 )
 

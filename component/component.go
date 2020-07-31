@@ -1,6 +1,6 @@
 package component
 
-import "github.com/micahkemp/scadder-go/renderer"
+import "github.com/micahkemp/scad/renderer"
 
 type RenderFields interface {
 	Fields() renderer.Fields
