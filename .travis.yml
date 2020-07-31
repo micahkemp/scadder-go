@@ -1,5 +1,6 @@
 language: go
 
 script:
+  - pwd
   - test -z $(gofmt -l .)
   - go test -v ./...
