@@ -1,8 +1,8 @@
 package solids
 
 import (
-	"component"
-	"renderer"
+	"beatthehell.net/scadder/component"
+	"beatthehell.net/scadder/renderer"
 	"testing"
 )
 
