@@ -1,8 +1,8 @@
 package solids
 
 import (
-	"pkg/component"
-	"pkg/renderer"
+	"component"
+	"renderer"
 	"testing"
 )
 

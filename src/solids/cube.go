@@ -2,7 +2,7 @@ package solids
 
 import (
 	"fmt"
-	"pkg/renderer"
+	"renderer"
 	"strconv"
 )
 

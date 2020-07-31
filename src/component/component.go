@@ -1,6 +1,6 @@
 package component
 
-import "pkg/renderer"
+import "renderer"
 
 type RenderFields interface {
 	Fields() renderer.Fields
