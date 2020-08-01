@@ -18,7 +18,7 @@ func TestFields(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		c := Cube{test.l, test.w, test.h, renderer.Renderer{}}
+		c := cube{test.l, test.w, test.h, renderer.Renderer{}}
 		f := c.Fields()
 		ok := true
 		if len(f) != len(test.want) {
@@ -38,5 +38,5 @@ func TestFields(t *testing.T) {
 }
 
 func TestInterface(t *testing.T) {
-	component.RenderFieldsComponent(Cube{})
+	component.RenderFieldsComponent(cube{})
 }
