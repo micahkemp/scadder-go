@@ -18,7 +18,7 @@ func TestNew(t *testing.T) {
 		{"no variables", fields.Fields{}, "no variables"},
 		{"{{ .Name.String }}", fields.Fields{}, testName.String()},
 		{"{{ .CallName }}", fields.Fields{}, callName},
-		{"{{ .Fields.String }}", fields.New(map[string]string{"fieldA": "valueA"}), "fieldA=valueA"},
+		{"{{ .Fields.String }}", fields.NewFields(map[string]string{"fieldA": "valueA"}), "fieldA=valueA"},
 	}
 
 	for _, test := range tests {

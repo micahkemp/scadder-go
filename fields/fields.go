@@ -6,6 +6,14 @@ import (
 	"strings"
 )
 
+type Fields struct {
+	values map[string]string
+}
+
+func NewFields(v map[string]string) Fields {
+	return Fields{v}
+}
+
 func (f Fields) String() string {
 	var keys []string
 	for k := range f.values {

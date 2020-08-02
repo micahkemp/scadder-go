@@ -36,7 +36,7 @@ func TestString(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		f := New(test.input)
+		f := NewFields(test.input)
 
 		if f.String() != test.want {
 			t.Errorf("New(%q).String() = %s, want %s",
