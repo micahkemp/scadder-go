@@ -15,7 +15,7 @@ type Template struct {
 	Fields   fields.Fields
 }
 
-func New(n name.Name, s string, c string, f fields.Fields) Template {
+func NewTemplate(n name.Name, s string, c string, f fields.Fields) Template {
 	return Template{
 		n,
 		s,

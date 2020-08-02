@@ -22,7 +22,7 @@ func TestNew(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		template := New(testName, test.template, callName, test.fields)
+		template := NewTemplate(testName, test.template, callName, test.fields)
 		got := template.String()
 		if got != test.want {
 			t.Errorf("New(%v, %v).String() = %s, want %s",
