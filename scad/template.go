@@ -1,21 +1,19 @@
-package template
+package scad
 
 import (
 	"bytes"
-	"github.com/micahkemp/scad/fields"
-	"github.com/micahkemp/scad/name"
 	"log"
 	"text/template"
 )
 
 type Template struct {
-	Name     name.Name
+	Name     Name
 	template string
 	CallName string
-	Fields   fields.Fields
+	Fields   Fields
 }
 
-func NewTemplate(n name.Name, s string, c string, f fields.Fields) Template {
+func NewTemplate(n Name, s string, c string, f Fields) Template {
 	return Template{
 		n,
 		s,
