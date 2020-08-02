@@ -21,3 +21,22 @@ func TestShortFloat(t *testing.T) {
 		}
 	}
 }
+
+func TestShortFloatList(t *testing.T) {
+	tests := []struct {
+		floats []float64
+		want   string
+	}{
+		{[]float64{1}, "[1]"},
+		{[]float64{1, 2.1}, "[1, 2.1]"},
+		{[]float64{1, 2.1, 3.12}, "[1, 2.1, 3.12]"},
+	}
+
+	for _, test := range tests {
+		got := ShortFloatList(test.floats...)
+
+		if got != test.want {
+			t.Errorf("ShortFloatList(%v) = \"%s\", want \"%s\"", test.floats, got, test.want)
+		}
+	}
+}
