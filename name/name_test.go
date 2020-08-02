@@ -13,8 +13,8 @@ func TestFirstValid(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		if got, ok := FirstValid(test.choices...); got != Name(test.wantName) || ok != test.wantOk {
-			t.Errorf("FirstValid(%q) = (%q, %v), want (%q, %v)",
+		if got, ok := FirstValidName(test.choices...); got != Name(test.wantName) || ok != test.wantOk {
+			t.Errorf("FirstValidName(%q) = (%q, %v), want (%q, %v)",
 				test.choices,
 				got,
 				ok,

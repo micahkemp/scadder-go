@@ -12,11 +12,11 @@ func TestFilename(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		n, _ := New(test.input)
+		n, _ := NewName(test.input)
 		got := n.Filename()
 
 		if got != test.want {
-			t.Errorf("New(%q).Filename() = %q, want %q",
+			t.Errorf("NewName(%q).Filename() = %q, want %q",
 				test.input,
 				got,
 				test.want)

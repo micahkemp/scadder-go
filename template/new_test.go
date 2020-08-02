@@ -7,7 +7,7 @@ import (
 )
 
 func TestNew(t *testing.T) {
-	testName, _ := name.New("testName")
+	testName, _ := name.NewName("testName")
 	callName := "callModule"
 
 	tests := []struct {
