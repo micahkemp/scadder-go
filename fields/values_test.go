@@ -11,13 +11,13 @@ func TestString(t *testing.T) {
 		{map[string]string{
 			"fieldA": "valueA",
 		},
-			`fieldA="valueA"`,
+			`fieldA=valueA`,
 		},
 		// embedded quotes
 		{map[string]string{
-			"fieldA": "value\"A\"",
+			"fieldA": `value"A"`,
 		},
-			`fieldA="value\"A\""`,
+			`fieldA=value"A"`,
 		},
 		// multiple fields, sorted by key
 		{map[string]string{
@@ -25,7 +25,7 @@ func TestString(t *testing.T) {
 			"fieldA": "valueA",
 			"fieldB": "valueB",
 		},
-			`fieldA="valueA", fieldB="valueB", fieldC="valueC"`,
+			`fieldA=valueA, fieldB=valueB, fieldC=valueC`,
 		},
 	}
 

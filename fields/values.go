@@ -15,7 +15,7 @@ func (f Fields) String() string {
 
 	var keyValues []string
 	for _, k := range keys {
-		keyValues = append(keyValues, fmt.Sprintf("%s=%q", k, f.values[k]))
+		keyValues = append(keyValues, fmt.Sprintf("%s=%s", k, f.values[k]))
 	}
 
 	return strings.Join(keyValues, ", ")
