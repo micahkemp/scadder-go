@@ -13,6 +13,12 @@ func TestString(t *testing.T) {
 		},
 			`fieldA=valueA`,
 		},
+		// quoted value
+		{map[string]string{
+			"fieldA": `"valueA"`,
+		},
+			`fieldA="valueA"`,
+		},
 		// embedded quotes
 		{map[string]string{
 			"fieldA": `value"A"`,
