@@ -11,13 +11,15 @@ import (
 type Template struct {
 	Name     name.Name
 	template string
+	CallName string
 	Fields   fields.Fields
 }
 
-func New(n name.Name, s string, f fields.Fields) Template {
+func New(n name.Name, s string, c string, f fields.Fields) Template {
 	return Template{
 		n,
 		s,
+		c,
 		f,
 	}
 }
