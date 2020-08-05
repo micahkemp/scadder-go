@@ -1,4 +1,4 @@
-package scad
+package internal
 
 import "testing"
 

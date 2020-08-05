@@ -2,19 +2,20 @@ package scad
 
 import (
 	"bytes"
+	"github.com/micahkemp/scad/scad/internal"
 	"log"
 	"text/template"
 )
 
 type Template struct {
-	Name     Name
+	Name     internal.Name
 	template string
 	CallName string
-	Fields   Fields
+	Fields   internal.Fields
 	Children []Template
 }
 
-func NewTemplate(name Name, template string, callName string, fields Fields, children ...Template) Template {
+func NewTemplate(name internal.Name, template string, callName string, fields internal.Fields, children ...Template) Template {
 	return Template{
 		name,
 		template,

@@ -1,9 +1,12 @@
-package scad
+package scad_test
 
-import "testing"
+import (
+	"github.com/micahkemp/scad/scad"
+	"testing"
+)
 
 func TestTranslate(t *testing.T) {
-	child1 := NewCube(1, 2, 3, "")
+	child1 := scad.NewCube(1, 2, 3, "")
 
 	test := struct {
 		x, y, z float64
@@ -19,7 +22,7 @@ module translate_module {
 }`,
 	}
 
-	newTranslate := NewTranslate(test.x, test.y, test.z, test.n, child1)
+	newTranslate := scad.NewTranslate(test.x, test.y, test.z, test.n, child1)
 
 	if newTranslate.String() != test.want {
 		t.Errorf("NewTranslate(%f, %f, %f, %s, %v).String() = %s, want %s",

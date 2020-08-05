@@ -1,6 +1,9 @@
-package scad
+package scad_test
 
-import "testing"
+import (
+	"github.com/micahkemp/scad/scad"
+	"testing"
+)
 
 func TestCube(t *testing.T) {
 	tests := []struct {
@@ -14,7 +17,7 @@ func TestCube(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		c := NewCube(test.x, test.y, test.z, test.n)
+		c := scad.NewCube(test.x, test.y, test.z, test.n)
 
 		if c.String() != test.want {
 			t.Errorf("NewCube(%f, %f, %f, %s).String() = %s, want %s",
