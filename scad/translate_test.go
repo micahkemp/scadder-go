@@ -8,10 +8,9 @@ func TestTranslate(t *testing.T) {
 	test := struct {
 		x, y, z float64
 		n       string
-		c       []Template
 		want    string
 	}{
-		1, 2, 3, "", []Template{child1}, `import <cube_component.scad>
+		1, 2, 3, "", `import <cube_component.scad>
 
 module translate_module {
 	translate(v=[1, 2, 3]) {
@@ -20,16 +19,30 @@ module translate_module {
 }`,
 	}
 
-	c := NewTranslate(test.x, test.y, test.z, test.n, child1)
+	newTranslate := NewTranslate(test.x, test.y, test.z, test.n, child1)
 
-	if c.String() != test.want {
+	if newTranslate.String() != test.want {
 		t.Errorf("NewTranslate(%f, %f, %f, %s, %v).String() = %s, want %s",
 			test.x,
 			test.y,
 			test.z,
 			test.n,
-			test.c,
-			c.String(),
+			child1,
+			newTranslate.String(),
+			test.want,
+		)
+	}
+
+	// this should give us the same results as creating the Translate object directly
+	// but we want to give a good failure message, so it's broken out separately
+	childTranslate := child1.Translate(test.x, test.y, test.z, test.n)
+	if childTranslate.String() != test.want {
+		t.Errorf("child1.Translate(%f, %f, %f, %s).String() = %s, want %s",
+			test.x,
+			test.y,
+			test.z,
+			test.n,
+			childTranslate.String(),
 			test.want,
 		)
 	}
