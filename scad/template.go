@@ -11,14 +11,16 @@ type Template struct {
 	template string
 	CallName string
 	Fields   Fields
+	Children []Template
 }
 
-func NewTemplate(n Name, s string, c string, f Fields) Template {
+func NewTemplate(name Name, template string, callName string, fields Fields, children ...Template) Template {
 	return Template{
-		n,
-		s,
-		c,
-		f,
+		name,
+		template,
+		callName,
+		fields,
+		children,
 	}
 }
 

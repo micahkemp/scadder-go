@@ -1,7 +1,7 @@
 package scad
 
 func NewCube(x, y, z float64, n string) Template {
-	name, _ := FirstValidName(n, "cube")
+	name, _ := FirstValidName(n, "cube_component")
 	fields := NewFields(map[string]string{
 		"size": ShortFloatList(x, y, z),
 	})
