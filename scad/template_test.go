@@ -62,3 +62,22 @@ func TestChildPath(t *testing.T) {
 	}
 
 }
+
+func TestRendered(t *testing.T) {
+	template := NewTemplate("test_template", "template contents", "call_name", internal.Fields{})
+	renderPath := "."
+
+	if template.rendered(renderPath) {
+		t.Errorf("before rendering, template.rendered(%q) = %v",
+			renderPath,
+			template.rendered(renderPath))
+	}
+
+	template.Render(renderPath)
+
+	if !template.rendered(renderPath) {
+		t.Errorf("after rendering, template.rendered(%q) = %v",
+			renderPath,
+			template.rendered(renderPath))
+	}
+}

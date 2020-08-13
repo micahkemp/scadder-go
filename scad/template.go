@@ -2,8 +2,11 @@ package scad
 
 import (
 	"bytes"
+	"fmt"
 	"github.com/micahkemp/scad/scad/internal"
+	"io/ioutil"
 	"log"
+	"os"
 	"path/filepath"
 	"text/template"
 )
@@ -36,6 +39,36 @@ func (t scadTemplate) String() string {
 	return buf.String()
 }
 
+func (t scadTemplate) rendered(path string) bool {
+	contents, err := ioutil.ReadFile(t.Name.FilePath(path))
+
+	if err != nil {
+		// any error assumes not rendered
+		return false
+	}
+
+	return string(contents) == t.String()
+}
+
 func (t scadTemplate) childPath(child scadTemplate, path string) string {
 	return filepath.Join(path, child.Name.String())
+}
+
+func (t scadTemplate) Render(path string) (ok bool) {
+	// OpenFile used specifically to enforce not overwriting an existing file, but instead failing
+	f, err := os.OpenFile(t.Name.FilePath(path), os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0644)
+	// TODO this needs to be handled properly
+	if err != nil {
+		fmt.Printf("(scadTemplate) Render(%q): %s\n", path, err)
+		return false
+	}
+
+	defer f.Close()
+
+	if _, err = f.WriteString(t.String()); err != nil {
+		fmt.Printf("(scadTemplate) Render(%q): %s\n", path, err)
+		return false
+	}
+
+	return true
 }
