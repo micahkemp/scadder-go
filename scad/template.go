@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"github.com/micahkemp/scad/scad/internal"
 	"log"
+	"path/filepath"
 	"text/template"
 )
 
