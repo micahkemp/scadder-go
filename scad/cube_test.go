@@ -11,9 +11,13 @@ func TestCube(t *testing.T) {
 		n       string
 		want    string
 	}{
-		{1, 2, 3, "", `module cube_component {
+		{1, 2, 3, "", `module cube_component() {
 	cube(size=[1, 2, 3]);
-}`},
+}
+
+// call module when loaded directly
+cube_component();
+`},
 	}
 
 	for _, test := range tests {

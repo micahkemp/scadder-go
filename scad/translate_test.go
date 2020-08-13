@@ -13,13 +13,17 @@ func TestTranslate(t *testing.T) {
 		n       string
 		want    string
 	}{
-		1, 2, 3, "", `import <cube_component.scad>
+		1, 2, 3, "", `use <cube_component/cube_component.scad>
 
-module translate_module {
+module translate_component() {
 	translate(v=[1, 2, 3]) {
 		cube_component();
 	}
-}`,
+}
+
+// call module when loaded directly
+translate_component();
+`,
 	}
 
 	newTranslate := scad.NewTranslate(test.x, test.y, test.z, test.n, child1)
