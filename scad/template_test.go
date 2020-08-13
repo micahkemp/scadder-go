@@ -2,6 +2,8 @@ package scad
 
 import (
 	"github.com/micahkemp/scad/scad/internal"
+	"io/ioutil"
+	"os"
 	"testing"
 )
 
@@ -67,7 +69,14 @@ func TestRendered(t *testing.T) {
 	child := NewTemplate("child_template", "template contents", "call_name", internal.Fields{})
 	parent := NewTemplate("parent_template", "template contents", "call_name", internal.Fields{})
 	parent.Children = []scadTemplate{child}
-	renderPath := "test_render"
+	renderPath, err := ioutil.TempDir("", "")
+	if err != nil {
+		t.Errorf("ioutil.TempDir(%q, %q) err: %s",
+			"",
+			"",
+			err)
+	}
+	defer os.RemoveAll(renderPath)
 
 	if parent.rendered(renderPath) {
 		t.Errorf("before rendering, parent.rendered(%q) = %v",
