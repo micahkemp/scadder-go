@@ -2,6 +2,7 @@ package internal
 
 import (
 	"fmt"
+	"path/filepath"
 	"regexp"
 )
 
@@ -44,4 +45,8 @@ func (n Name) String() string {
 
 func (n Name) Filename() string {
 	return fmt.Sprintf("%s.%s", n, extension)
+}
+
+func (n Name) FilePath(p string) string {
+	return filepath.Join(p, n.Filename())
 }

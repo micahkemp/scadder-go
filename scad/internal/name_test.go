@@ -49,24 +49,36 @@ func TestFirstValid(t *testing.T) {
 	}
 }
 
-func TestFilename(t *testing.T) {
+func TestFilenameFilePath(t *testing.T) {
 	tests := []struct {
-		input string
-		want  string
+		name         string
+		path         string
+		wantFilename string
+		wantFilePath string
 	}{
-		{"aa", "aa.scad"},
-		{"bb", "bb.scad"},
+		{"aa", ".", "aa.scad", "aa.scad"},
+		{"bb", "relative_output_path", "bb.scad", "relative_output_path/bb.scad"},
+		{"cc", "/absolute_output_path", "cc.scad", "/absolute_output_path/cc.scad"},
 	}
 
 	for _, test := range tests {
-		n, _ := NewName(test.input)
-		got := n.Filename()
+		n, _ := NewName(test.name)
+		gotFilename := n.Filename()
+		gotFilePath := n.FilePath(test.path)
 
-		if got != test.want {
+		if gotFilename != test.wantFilename {
 			t.Errorf("NewName(%q).Filename() = %q, want %q",
-				test.input,
-				got,
-				test.want)
+				test.name,
+				gotFilename,
+				test.wantFilename)
+		}
+
+		if gotFilePath != test.wantFilePath {
+			t.Errorf("NewName(%q).FilePath(%q) = %q, want %q",
+				test.name,
+				test.path,
+				gotFilePath,
+				test.wantFilePath)
 		}
 	}
 }
