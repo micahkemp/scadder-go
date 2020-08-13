@@ -54,7 +54,28 @@ func (t scadTemplate) childPath(child scadTemplate, path string) string {
 	return filepath.Join(path, child.Name.String())
 }
 
+func (t scadTemplate) childRendered(child scadTemplate, path string) bool {
+	return child.rendered(t.childPath(child, path))
+}
+
 func (t scadTemplate) Render(path string) (ok bool) {
+	if err := os.MkdirAll(path, 0755); err != nil {
+		// TODO this needs to be handled properly
+		fmt.Printf("Unable to create directory: %s: %s", path, err)
+		return false
+	}
+
+	// handle children first
+	for _, c := range t.Children {
+		if cRenderOk := c.Render(t.childPath(c, path)); cRenderOk == false {
+			return false
+		}
+	}
+
+	if t.rendered(path) {
+		return true
+	}
+
 	// OpenFile used specifically to enforce not overwriting an existing file, but instead failing
 	f, err := os.OpenFile(t.Name.FilePath(path), os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0644)
 	// TODO this needs to be handled properly
