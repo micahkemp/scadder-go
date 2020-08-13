@@ -34,3 +34,7 @@ func (t scadTemplate) String() string {
 	}
 	return buf.String()
 }
+
+func (t scadTemplate) childPath(child scadTemplate, path string) string {
+	return filepath.Join(path, child.Name.String())
+}

@@ -32,3 +32,33 @@ func TestNew(t *testing.T) {
 		}
 	}
 }
+
+func TestChildPath(t *testing.T) {
+	tests := []struct {
+		name      string
+		path      string
+		childPath string
+	}{
+		{"testA", ".", "testA"},
+		{"testB", "output_path", "output_path/testB"},
+	}
+
+	// children don't currently have to be children of the parent for this test to succeed
+	// that's ok
+	parent := NewTemplate("parent", "", "", internal.Fields{})
+
+	for _, test := range tests {
+		childName, _ := internal.NewName(test.name)
+		child := NewTemplate(childName, "", "", internal.Fields{})
+		childPath := parent.childPath(child, test.path)
+
+		if childPath != test.childPath {
+			t.Errorf("parent.childPath(%v, %q) = %q, want %q",
+				child,
+				test.path,
+				childPath,
+				test.childPath)
+		}
+	}
+
+}
