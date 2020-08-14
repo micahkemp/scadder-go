@@ -28,14 +28,16 @@ func NewName(s string) (n Name, ok bool) {
 	return
 }
 
-func FirstValidName(strings ...string) (n Name, ok bool) {
-	for _, s := range strings {
-		n, ok = NewName(s)
+func FirstValidName(strings ...string) (name string, ok bool) {
+	for _, name = range strings {
+		_, ok = NewName(name)
 		if ok {
 			return
 		}
 	}
 
+	// clear name before returning with ok = false
+	name = ""
 	return
 }
 

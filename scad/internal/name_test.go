@@ -38,7 +38,7 @@ func TestFirstValid(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		if got, ok := FirstValidName(test.choices...); got != Name(test.wantName) || ok != test.wantOk {
+		if got, ok := FirstValidName(test.choices...); got != test.wantName || ok != test.wantOk {
 			t.Errorf("FirstValidName(%q) = (%q, %v), want (%q, %v)",
 				test.choices,
 				got,

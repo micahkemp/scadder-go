@@ -8,7 +8,7 @@ import (
 )
 
 func TestNew(t *testing.T) {
-	testName, _ := internal.NewName("testName")
+	testName := "testName"
 	callName := "callModule"
 
 	tests := []struct {
@@ -17,7 +17,7 @@ func TestNew(t *testing.T) {
 		want     string
 	}{
 		{"no variables", internal.Fields{}, "no variables"},
-		{"{{ .Name.String }}", internal.Fields{}, testName.String()},
+		{"{{ .Name.String }}", internal.Fields{}, testName},
 		{"{{ .CallName }}", internal.Fields{}, callName},
 		{"{{ .Fields.String }}", internal.NewFields(map[string]string{"fieldA": "valueA"}), "fieldA=valueA"},
 	}
@@ -50,7 +50,7 @@ func TestChildPath(t *testing.T) {
 	parent := NewTemplate("parent", "", "", internal.Fields{})
 
 	for _, test := range tests {
-		childName, _ := internal.NewName(test.name)
+		childName := test.name
 		child := NewTemplate(childName, "", "", internal.Fields{})
 		childPath := parent.childPath(child, test.path)
 

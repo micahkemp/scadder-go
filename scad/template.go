@@ -19,9 +19,12 @@ type scadTemplate struct {
 	Children []scadTemplate
 }
 
-func NewTemplate(name internal.Name, template string, callName string, fields internal.Fields, children ...scadTemplate) scadTemplate {
+func NewTemplate(name string, template string, callName string, fields internal.Fields, children ...scadTemplate) scadTemplate {
+	// TODO - need to handle potential error here
+	newName, _ := internal.NewName(name)
+
 	return scadTemplate{
-		name,
+		newName,
 		template,
 		callName,
 		fields,
