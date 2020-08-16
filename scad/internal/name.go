@@ -10,7 +10,7 @@ type Name string
 
 // start with letter, end with letter
 // digits and underscores permitted between
-const validPattern = "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z]$"
+const validPattern = "^[a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$"
 
 // filename extension
 const extension = "scad"

@@ -10,7 +10,6 @@ func TestValid(t *testing.T) {
 		{"", false},
 		{"a", false},
 		{"0a", false},
-		{"a0", false},
 		{"a-a", false},
 		{"_a", false},
 		{"a_", false},
@@ -18,6 +17,7 @@ func TestValid(t *testing.T) {
 		{"a0a", true},
 		{"aa", true},
 		{"a_a", true},
+		{"a0", true},
 	}
 
 	for _, test := range tests {
