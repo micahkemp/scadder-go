@@ -8,7 +8,7 @@ import (
 func TestCube(t *testing.T) {
 	tests := []struct {
 		x, y, z float64
-		center	bool
+		center  bool
 		n       string
 		want    string
 	}{
