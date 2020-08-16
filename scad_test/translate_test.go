@@ -26,14 +26,14 @@ translate_component();
 `,
 	}
 
-	newTranslate := scad.NewTranslate(test.x, test.y, test.z, test.n, child1)
+	newTranslate := scad.NewTranslate(test.n, test.x, test.y, test.z, child1)
 
 	if newTranslate.String() != test.want {
-		t.Errorf("NewTranslate(%f, %f, %f, %s, %v).String() = %s, want %s",
+		t.Errorf("NewTranslate(%q, %f, %f, %f, %v).String() = %s, want %s",
+			test.n,
 			test.x,
 			test.y,
 			test.z,
-			test.n,
 			child1,
 			newTranslate.String(),
 			test.want,
@@ -42,13 +42,13 @@ translate_component();
 
 	// this should give us the same results as creating the Translate object directly
 	// but we want to give a good failure message, so it's broken out separately
-	childTranslate := child1.Translate(test.x, test.y, test.z, test.n)
+	childTranslate := child1.Translate(test.n, test.x, test.y, test.z)
 	if childTranslate.String() != test.want {
-		t.Errorf("child1.Translate(%f, %f, %f, %s).String() = %s, want %s",
+		t.Errorf("child1.Translate(%q, %f, %f, %f).String() = %s, want %s",
+			test.n,
 			test.x,
 			test.y,
 			test.z,
-			test.n,
 			childTranslate.String(),
 			test.want,
 		)
