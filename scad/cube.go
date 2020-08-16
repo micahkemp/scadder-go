@@ -8,5 +8,5 @@ func NewCube(x, y, z float64, n string) scadTemplate {
 		"size": internal.ShortFloatList(x, y, z),
 	})
 
-	return NewTemplate(name, internal.ShapeTemplate, "cube", fields)
+	return newTemplate(name, internal.ShapeTemplate, "cube", fields)
 }

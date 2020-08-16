@@ -8,7 +8,7 @@ func NewTranslate(x, y, z float64, n string, c ...scadTemplate) scadTemplate {
 		"v": internal.ShortFloatList(x, y, z),
 	})
 
-	return NewTemplate(name, internal.TransformationTemplate, "translate", fields, c...)
+	return newTemplate(name, internal.TransformationTemplate, "translate", fields, c...)
 }
 
 func (t scadTemplate) Translate(x, y, z float64, n string) scadTemplate {

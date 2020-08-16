@@ -23,7 +23,7 @@ func TestNew(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		template := NewTemplate(testName, test.template, callName, test.fields)
+		template := newTemplate(testName, test.template, callName, test.fields)
 		got := template.String()
 		if got != test.want {
 			t.Errorf("New(%v, %v).String() = %s, want %s",
@@ -47,11 +47,11 @@ func TestChildPath(t *testing.T) {
 
 	// children don't currently have to be children of the parent for this test to succeed
 	// that's ok
-	parent := NewTemplate("parent", "", "", internal.Fields{})
+	parent := newTemplate("parent", "", "", internal.Fields{})
 
 	for _, test := range tests {
 		childName := test.name
-		child := NewTemplate(childName, "", "", internal.Fields{})
+		child := newTemplate(childName, "", "", internal.Fields{})
 		childPath := parent.childPath(child, test.path)
 
 		if childPath != test.childPath {
@@ -66,8 +66,8 @@ func TestChildPath(t *testing.T) {
 }
 
 func TestRendered(t *testing.T) {
-	child := NewTemplate("child_template", "template contents", "call_name", internal.Fields{})
-	parent := NewTemplate("parent_template", "template contents", "call_name", internal.Fields{})
+	child := newTemplate("child_template", "template contents", "call_name", internal.Fields{})
+	parent := newTemplate("parent_template", "template contents", "call_name", internal.Fields{})
 	parent.Children = []scadTemplate{child}
 	renderPath, err := ioutil.TempDir("", "")
 	if err != nil {
