@@ -27,19 +27,20 @@ func TestValid(t *testing.T) {
 	}
 }
 
-func TestFirstValid(t *testing.T) {
+func TestFirstNonEmptyName(t *testing.T) {
 	tests := []struct {
 		choices  []string
 		wantName string
 		wantOk   bool
 	}{
-		{[]string{"", "a"}, "", false},
-		{[]string{"", "a", "aa", "bb", "cc"}, "aa", true},
+		{[]string{"", "a"}, "a", false},
+		{[]string{"", "a", "aa", "bb", "cc"}, "a", false},
+		{[]string{"", "aa", "bb", "cc"}, "aa", true},
 	}
 
 	for _, test := range tests {
-		if got, ok := FirstValidName(test.choices...); got != test.wantName || ok != test.wantOk {
-			t.Errorf("FirstValidName(%q) = (%q, %v), want (%q, %v)",
+		if got, ok := FirstNonEmptyName(test.choices...); got != test.wantName || ok != test.wantOk {
+			t.Errorf("FirstNonEmptyName(%q) = (%q, %v), want (%q, %v)",
 				test.choices,
 				got,
 				ok,

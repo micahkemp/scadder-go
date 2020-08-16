@@ -28,10 +28,13 @@ func NewName(s string) (n Name, ok bool) {
 	return
 }
 
-func FirstValidName(strings ...string) (name string, ok bool) {
-	for _, name = range strings {
-		_, ok = NewName(name)
-		if ok {
+// returns
+//   name: first non-empty name passed
+//   ok:   the name's validity
+func FirstNonEmptyName(names ...string) (name string, ok bool) {
+	for _, name = range names {
+		if name != "" {
+			_, ok = NewName(name)
 			return
 		}
 	}
