@@ -7,12 +7,12 @@ import (
 
 func TestCylinderByRadius(t *testing.T) {
 	tests := []struct {
+		n      string
 		r, h   float64
 		center bool
-		n      string
 		want   string
 	}{
-		{1, 2, false, "", `module cylinder_component() {
+		{"", 1, 2, false, `module cylinder_component() {
 	cylinder(center=false, h=2, r=1);
 }
 
@@ -22,14 +22,14 @@ cylinder_component();
 	}
 
 	for _, test := range tests {
-		c := scad.NewCylinderByRadius(test.r, test.h, test.center, test.n)
+		c := scad.NewCylinderByRadius(test.n, test.r, test.h, test.center)
 
 		if c.String() != test.want {
-			t.Errorf("NewCylinderByRadius(%f, %f, %t, %s).String() = %s, want %s",
+			t.Errorf("NewCylinderByRadius(%q, %f, %f, %t).String() = %s, want %s",
+				test.n,
 				test.r,
 				test.h,
 				test.center,
-				test.n,
 				c.String(),
 				test.want,
 			)
