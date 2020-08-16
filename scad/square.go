@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-func NewSquare(x, y float64, center bool, n string) scadTemplate {
+func NewSquare(n string, x, y float64, center bool) scadTemplate {
 	name, _ := internal.FirstNonEmptyName(n, "square_component")
 	fields := internal.NewFields(map[string]string{
 		"size":   internal.ShortFloatList(x, y),
