@@ -7,10 +7,10 @@ import (
 
 func TestCylinderByRadius(t *testing.T) {
 	tests := []struct {
-		r, h	float64
-		center	bool
-		n       string
-		want    string
+		r, h   float64
+		center bool
+		n      string
+		want   string
 	}{
 		{1, 2, false, "", `module cylinder_component() {
 	cylinder(center=false, h=2, r=1);
