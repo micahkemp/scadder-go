@@ -18,6 +18,13 @@ func TestCube(t *testing.T) {
 // call module when loaded directly
 cube_component();
 `},
+		{1, 2, 3, "my_cube", `module my_cube() {
+	cube(size=[1, 2, 3]);
+}
+
+// call module when loaded directly
+my_cube();
+`},
 	}
 
 	for _, test := range tests {
