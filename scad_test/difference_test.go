@@ -6,8 +6,8 @@ import (
 )
 
 func TestDifference(t *testing.T) {
-	child1 := scad.NewCube(1, 2, 3, "child1")
-	child2 := scad.NewCube(1, 2, 3, "child2")
+	child1 := scad.NewCube(1, 2, 3, false, "child1")
+	child2 := scad.NewCube(1, 2, 3, false, "child2")
 
 	test := struct {
 		name string

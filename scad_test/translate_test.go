@@ -6,7 +6,7 @@ import (
 )
 
 func TestTranslate(t *testing.T) {
-	child1 := scad.NewCube(1, 2, 3, "")
+	child1 := scad.NewCube(1, 2, 3, false, "")
 
 	test := struct {
 		x, y, z float64
