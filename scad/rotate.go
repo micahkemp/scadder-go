@@ -2,16 +2,16 @@ package scad
 
 import "github.com/micahkemp/scad/scad/internal"
 
-func NewRotate(n string, a, x, y, z float64, c ...scadTemplate) scadTemplate {
-	name, _ := internal.FirstNonEmptyName(n, "rotate_component")
+func NewRotate(name string, a, x, y, z float64, c ...scadTemplate) scadTemplate {
+	n, _ := internal.FirstNonEmptyName(name, "rotate_component")
 	fields := internal.NewFields(map[string]string{
 		"a": internal.ShortFloat(a),
 		"v": internal.ShortFloatList(x, y, z),
 	})
 
-	return newTemplate(name, internal.TransformationTemplate, "rotate", fields, c...)
+	return newTemplate(n, internal.TransformationTemplate, "rotate", fields, c...)
 }
 
-func (t scadTemplate) Rotate(n string, a, x, y, z float64) scadTemplate {
-	return NewRotate(n, a, x, y, z, t)
+func (t scadTemplate) Rotate(name string, a, x, y, z float64) scadTemplate {
+	return NewRotate(name, a, x, y, z, t)
 }

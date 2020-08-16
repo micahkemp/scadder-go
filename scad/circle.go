@@ -5,16 +5,16 @@ import (
 	"strconv"
 )
 
-func NewCircleByRadius(n string, r float64, center bool) scadTemplate {
-	name, _ := internal.FirstNonEmptyName(n, "circle_component")
+func NewCircleByRadius(name string, r float64, center bool) scadTemplate {
+	n, _ := internal.FirstNonEmptyName(name, "circle_component")
 	fields := internal.NewFields(map[string]string{
 		"r":      internal.ShortFloat(r),
 		"center": strconv.FormatBool(center),
 	})
 
-	return newTemplate(name, internal.ShapeTemplate, "circle", fields)
+	return newTemplate(n, internal.ShapeTemplate, "circle", fields)
 }
 
-func NewCircleByDiameter(n string, d float64, center bool) scadTemplate {
-	return NewCircleByRadius(n, d/2, center)
+func NewCircleByDiameter(name string, d float64, center bool) scadTemplate {
+	return NewCircleByRadius(name, d/2, center)
 }

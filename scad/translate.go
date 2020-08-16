@@ -2,15 +2,15 @@ package scad
 
 import "github.com/micahkemp/scad/scad/internal"
 
-func NewTranslate(n string, x, y, z float64, c ...scadTemplate) scadTemplate {
-	name, _ := internal.FirstNonEmptyName(n, "translate_component")
+func NewTranslate(name string, x, y, z float64, c ...scadTemplate) scadTemplate {
+	n, _ := internal.FirstNonEmptyName(name, "translate_component")
 	fields := internal.NewFields(map[string]string{
 		"v": internal.ShortFloatList(x, y, z),
 	})
 
-	return newTemplate(name, internal.TransformationTemplate, "translate", fields, c...)
+	return newTemplate(n, internal.TransformationTemplate, "translate", fields, c...)
 }
 
-func (t scadTemplate) Translate(n string, x, y, z float64) scadTemplate {
-	return NewTranslate(n, x, y, z, t)
+func (t scadTemplate) Translate(name string, x, y, z float64) scadTemplate {
+	return NewTranslate(name, x, y, z, t)
 }

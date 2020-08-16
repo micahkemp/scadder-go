@@ -2,13 +2,13 @@ package scad
 
 import "github.com/micahkemp/scad/scad/internal"
 
-func NewUnion(n string, c ...scadTemplate) scadTemplate {
-	name, _ := internal.FirstNonEmptyName(n, "union_component")
+func NewUnion(name string, c ...scadTemplate) scadTemplate {
+	n, _ := internal.FirstNonEmptyName(name, "union_component")
 
-	return newTemplate(name, internal.TransformationTemplate, "union", internal.Fields{}, c...)
+	return newTemplate(n, internal.TransformationTemplate, "union", internal.Fields{}, c...)
 }
 
-func (t scadTemplate) Add(n string, c ...scadTemplate) scadTemplate {
+func (t scadTemplate) Add(name string, c ...scadTemplate) scadTemplate {
 	allChildren := append([]scadTemplate{t}, c...)
-	return NewUnion(n, allChildren...)
+	return NewUnion(name, allChildren...)
 }
