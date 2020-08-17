@@ -37,3 +37,7 @@ func NewRegularPolygon(name string, sides int, radius float64) scadTemplate {
 
 	return NewPolygon(name, attrs.points())
 }
+
+func NewHexagon(name string, radius float64) scadTemplate {
+	return NewRegularPolygon(name, 6, radius)
+}
