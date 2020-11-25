@@ -24,7 +24,7 @@ var NestingTubesConfigExample = NestingTubesConfig{
 
 type NestingTubes struct {
 	NestingTubesConfig
-	scad.ScadTemplate
+	scad.Union
 }
 
 func NewNestingTubesFromConfig(n string, c NestingTubesConfig) NestingTubes {

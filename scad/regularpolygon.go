@@ -7,6 +7,14 @@ type regularPolygonAttributes struct {
 	radius float64
 }
 
+type RegularPolygon struct {
+	Polygon
+}
+
+type Hexagon struct {
+	RegularPolygon
+}
+
 func (p regularPolygonAttributes) angleRadiansPerPoint() float64 {
 	return (math.Pi * 2) / float64(p.sides)
 }
@@ -32,12 +40,16 @@ func (p regularPolygonAttributes) points() Points2D {
 	return points
 }
 
-func NewRegularPolygon(name string, sides int, radius float64) ScadTemplate {
+func NewRegularPolygon(name string, sides int, radius float64) RegularPolygon {
 	attrs := regularPolygonAttributes{sides, radius}
 
-	return NewPolygon(name, attrs.points())
+	return RegularPolygon{
+		NewPolygon(name, attrs.points()),
+	}
 }
 
-func NewHexagon(name string, radius float64) ScadTemplate {
-	return NewRegularPolygon(name, 6, radius)
+func NewHexagon(name string, radius float64) Hexagon {
+	return Hexagon{
+		NewRegularPolygon(name, 6, radius),
+	}
 }

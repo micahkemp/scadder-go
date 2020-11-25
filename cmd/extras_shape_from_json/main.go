@@ -12,5 +12,5 @@ func main() {
 	outputName := os.Args[3]
 
 	object := scad.NewOfTypeFromJSONFile(extras.ExampleConfigs, configType, outputName, configFile)
-	object.Render(".")
+	object.Render(outputName)
 }
