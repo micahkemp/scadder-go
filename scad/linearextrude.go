@@ -4,7 +4,7 @@ import (
 	"github.com/micahkemp/scad/scad/internal"
 )
 
-func NewLinearExtrude(name string, h float64, c ...DirPathRenderer) scadTemplate {
+func NewLinearExtrude(name string, h float64, c ...DirPathRenderer) ScadTemplate {
 	n, _ := internal.FirstNonEmptyName(name, "linear_extrude_component")
 	fields := internal.NewFields(map[string]string{
 		"h": internal.ShortFloat(h),
@@ -13,6 +13,6 @@ func NewLinearExtrude(name string, h float64, c ...DirPathRenderer) scadTemplate
 	return newTemplate(n, internal.TransformationTemplate, "linear_extrude", fields, c...)
 }
 
-func (t scadTemplate) LinearExtrude(name string, h float64) scadTemplate {
+func (t ScadTemplate) LinearExtrude(name string, h float64) ScadTemplate {
 	return NewLinearExtrude(name, h, t)
 }

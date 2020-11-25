@@ -32,12 +32,12 @@ func (p regularPolygonAttributes) points() Points2D {
 	return points
 }
 
-func NewRegularPolygon(name string, sides int, radius float64) scadTemplate {
+func NewRegularPolygon(name string, sides int, radius float64) ScadTemplate {
 	attrs := regularPolygonAttributes{sides, radius}
 
 	return NewPolygon(name, attrs.points())
 }
 
-func NewHexagon(name string, radius float64) scadTemplate {
+func NewHexagon(name string, radius float64) ScadTemplate {
 	return NewRegularPolygon(name, 6, radius)
 }

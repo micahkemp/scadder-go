@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-func NewCube(name string, x, y, z float64, center bool) scadTemplate {
+func NewCube(name string, x, y, z float64, center bool) ScadTemplate {
 	n, _ := internal.FirstNonEmptyName(name, "cube_component")
 	fields := internal.NewFields(map[string]string{
 		"size":   internal.ShortFloatList(x, y, z),

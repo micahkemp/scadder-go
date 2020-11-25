@@ -21,7 +21,7 @@ var TubeConfigExample = TubeConfig{
 
 type tube struct {
 	TubeConfig
-	scad.DirPathRenderer
+	scad.ScadTemplate
 }
 
 func NewTubeFromConfig(n string, t TubeConfig) tube {

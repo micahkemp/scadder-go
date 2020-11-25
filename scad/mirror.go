@@ -2,7 +2,7 @@ package scad
 
 import "github.com/micahkemp/scad/scad/internal"
 
-func NewMirror(name string, x, y, z float64, c ...DirPathRenderer) scadTemplate {
+func NewMirror(name string, x, y, z float64, c ...DirPathRenderer) ScadTemplate {
 	n, _ := internal.FirstNonEmptyName(name, "mirror_component")
 	fields := internal.NewFields(map[string]string{
 		"v": internal.ShortFloatList(x, y, z),
@@ -11,6 +11,6 @@ func NewMirror(name string, x, y, z float64, c ...DirPathRenderer) scadTemplate 
 	return newTemplate(n, internal.TransformationTemplate, "mirror", fields, c...)
 }
 
-func (t scadTemplate) Mirror(name string, x, y, z float64) scadTemplate {
+func (t ScadTemplate) Mirror(name string, x, y, z float64) ScadTemplate {
 	return NewMirror(name, x, y, z, t)
 }

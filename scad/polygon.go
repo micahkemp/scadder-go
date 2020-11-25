@@ -4,7 +4,7 @@ import (
 	"github.com/micahkemp/scad/scad/internal"
 )
 
-func NewPolygon(name string, points Points2D) scadTemplate {
+func NewPolygon(name string, points Points2D) ScadTemplate {
 	n, _ := internal.FirstNonEmptyName(name, "polygon_component")
 	fields := internal.NewFields(map[string]string{
 		"points": points.String(),
