@@ -2,7 +2,7 @@ package scad
 
 import "github.com/micahkemp/scad/scad/internal"
 
-func NewRotate(name string, a, x, y, z float64, c ...scadTemplate) scadTemplate {
+func NewRotate(name string, a, x, y, z float64, c ...DirPathRenderer) scadTemplate {
 	n, _ := internal.FirstNonEmptyName(name, "rotate_component")
 	fields := internal.NewFields(map[string]string{
 		"a": internal.ShortFloat(a),

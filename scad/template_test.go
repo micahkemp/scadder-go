@@ -35,40 +35,10 @@ func TestNew(t *testing.T) {
 	}
 }
 
-func TestChildPath(t *testing.T) {
-	tests := []struct {
-		name      string
-		path      string
-		childPath string
-	}{
-		{"testA", ".", "testA"},
-		{"testB", "output_path", "output_path/testB"},
-	}
-
-	// children don't currently have to be children of the parent for this test to succeed
-	// that's ok
-	parent := newTemplate("parent", "", "", internal.Fields{})
-
-	for _, test := range tests {
-		childName := test.name
-		child := newTemplate(childName, "", "", internal.Fields{})
-		childPath := parent.childPath(child, test.path)
-
-		if childPath != test.childPath {
-			t.Errorf("parent.childPath(%v, %q) = %q, want %q",
-				child,
-				test.path,
-				childPath,
-				test.childPath)
-		}
-	}
-
-}
-
 func TestRendered(t *testing.T) {
 	child := newTemplate("child_template", "template contents", "call_name", internal.Fields{})
 	parent := newTemplate("parent_template", "template contents", "call_name", internal.Fields{})
-	parent.Children = []scadTemplate{child}
+	parent.Children = []DirPathRenderer{child}
 	renderPath, err := ioutil.TempDir("", "")
 	if err != nil {
 		t.Errorf("ioutil.TempDir(%q, %q) err: %s",

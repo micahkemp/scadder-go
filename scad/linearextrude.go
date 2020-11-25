@@ -4,7 +4,7 @@ import (
 	"github.com/micahkemp/scad/scad/internal"
 )
 
-func NewLinearExtrude(name string, h float64, c ...scadTemplate) scadTemplate {
+func NewLinearExtrude(name string, h float64, c ...DirPathRenderer) scadTemplate {
 	n, _ := internal.FirstNonEmptyName(name, "linear_extrude_component")
 	fields := internal.NewFields(map[string]string{
 		"h": internal.ShortFloat(h),

@@ -2,7 +2,7 @@ package scad
 
 import "github.com/micahkemp/scad/scad/internal"
 
-func NewTranslate(name string, x, y, z float64, c ...scadTemplate) scadTemplate {
+func NewTranslate(name string, x, y, z float64, c ...DirPathRenderer) scadTemplate {
 	n, _ := internal.FirstNonEmptyName(name, "translate_component")
 	fields := internal.NewFields(map[string]string{
 		"v": internal.ShortFloatList(x, y, z),

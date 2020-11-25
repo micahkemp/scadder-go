@@ -48,6 +48,10 @@ func (n Name) String() string {
 	return string(n)
 }
 
+func (n Name) DirPath(p string) string {
+	return filepath.Join(p, n.String())
+}
+
 func (n Name) Filename() string {
 	return fmt.Sprintf("%s.%s", n, extension)
 }

@@ -4,7 +4,7 @@ import (
 	"github.com/micahkemp/scad/scad/internal"
 )
 
-func NewRotateExtrude(name string, angle float64, c ...scadTemplate) scadTemplate {
+func NewRotateExtrude(name string, angle float64, c ...DirPathRenderer) scadTemplate {
 	n, _ := internal.FirstNonEmptyName(name, "rotate_extrude_component")
 	fields := internal.NewFields(map[string]string{
 		"angle": internal.ShortFloat(angle),

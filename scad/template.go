@@ -7,19 +7,23 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"path/filepath"
 	"text/template"
 )
 
+type DirPathRenderer interface {
+	DirPath(p string) string
+	Render(path string) (ok bool)
+}
+
 type scadTemplate struct {
-	Name     internal.Name
+	internal.Name
 	template string
 	CallName string
 	Fields   internal.Fields
-	Children []scadTemplate
+	Children []DirPathRenderer
 }
 
-func newTemplate(name string, template string, callName string, fields internal.Fields, children ...scadTemplate) scadTemplate {
+func newTemplate(name string, template string, callName string, fields internal.Fields, children ...DirPathRenderer) scadTemplate {
 	// TODO - need to handle potential error here
 	newName, _ := internal.NewName(name)
 
@@ -53,12 +57,10 @@ func (t scadTemplate) rendered(path string) bool {
 	return string(contents) == t.String()
 }
 
-func (t scadTemplate) childPath(child scadTemplate, path string) string {
-	return filepath.Join(path, child.Name.String())
-}
-
+// childRendered is currently only used for testing
+// it should be considered for removal
 func (t scadTemplate) childRendered(child scadTemplate, path string) bool {
-	return child.rendered(t.childPath(child, path))
+	return child.rendered(child.DirPath(path))
 }
 
 func (t scadTemplate) Render(path string) (ok bool) {
@@ -70,7 +72,7 @@ func (t scadTemplate) Render(path string) (ok bool) {
 
 	// handle children first
 	for _, c := range t.Children {
-		if cRenderOk := c.Render(t.childPath(c, path)); cRenderOk == false {
+		if cRenderOk := c.Render(c.DirPath(path)); cRenderOk == false {
 			return false
 		}
 	}

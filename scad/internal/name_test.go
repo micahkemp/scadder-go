@@ -54,18 +54,28 @@ func TestFilenameFilePath(t *testing.T) {
 	tests := []struct {
 		name         string
 		path         string
+		wantDirPath  string
 		wantFilename string
 		wantFilePath string
 	}{
-		{"aa", ".", "aa.scad", "aa.scad"},
-		{"bb", "relative_output_path", "bb.scad", "relative_output_path/bb.scad"},
-		{"cc", "/absolute_output_path", "cc.scad", "/absolute_output_path/cc.scad"},
+		{"aa", ".", "aa", "aa.scad", "aa.scad"},
+		{"bb", "relative_output_path", "relative_output_path/bb", "bb.scad", "relative_output_path/bb.scad"},
+		{"cc", "/absolute_output_path", "/absolute_output_path/cc", "cc.scad", "/absolute_output_path/cc.scad"},
 	}
 
 	for _, test := range tests {
 		n, _ := NewName(test.name)
+		gotDirPath := n.DirPath(test.path)
 		gotFilename := n.Filename()
 		gotFilePath := n.FilePath(test.path)
+
+		if gotDirPath != test.wantDirPath {
+			t.Errorf("NewName(%q).DirPath(%q) = #{%q}, want %q",
+				test.name,
+				test.path,
+				gotDirPath,
+				test.wantDirPath)
+		}
 
 		if gotFilename != test.wantFilename {
 			t.Errorf("NewName(%q).Filename() = %q, want %q",
