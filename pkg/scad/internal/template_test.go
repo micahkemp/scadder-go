@@ -37,7 +37,7 @@ func TestNew(t *testing.T) {
 func TestRendered(t *testing.T) {
 	child := NewTemplate("child_template", "template contents", "call_name", Fields{})
 	parent := NewTemplate("parent_template", "template contents", "call_name", Fields{})
-	parent.Children = []DirPathRenderer{child}
+	parent.children = []DirPathRenderer{child}
 	renderPath, err := ioutil.TempDir("", "")
 	if err != nil {
 		t.Errorf("ioutil.TempDir(%q, %q) err: %s",

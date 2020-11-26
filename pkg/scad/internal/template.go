@@ -17,9 +17,9 @@ type DirPathRenderer interface {
 type ScadTemplate struct {
 	Name
 	template string
-	CallName string
-	Fields   Fields
-	Children []DirPathRenderer
+	callName string
+	fields   Fields
+	children []DirPathRenderer
 }
 
 func NewTemplate(name string, template string, callName string, fields Fields, children ...DirPathRenderer) ScadTemplate {
@@ -33,6 +33,18 @@ func NewTemplate(name string, template string, callName string, fields Fields, c
 		fields,
 		children,
 	}
+}
+
+func (t ScadTemplate) CallName() string {
+	return t.callName
+}
+
+func (t ScadTemplate) Fields() Fields {
+	return t.fields
+}
+
+func (t ScadTemplate) Children() []DirPathRenderer {
+	return t.children
 }
 
 func (t ScadTemplate) String() string {
@@ -70,7 +82,7 @@ func (t ScadTemplate) Render(path string) (ok bool) {
 	}
 
 	// handle children first
-	for _, c := range t.Children {
+	for _, c := range t.children {
 		if cRenderOk := c.Render(c.DirPath(path)); cRenderOk == false {
 			return false
 		}
