@@ -22,7 +22,7 @@ func TestNew(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		template := newTemplate(testName, test.template, callName, test.fields)
+		template := NewTemplate(testName, test.template, callName, test.fields)
 		got := template.String()
 		if got != test.want {
 			t.Errorf("New(%v, %v).String() = %s, want %s",
@@ -35,8 +35,8 @@ func TestNew(t *testing.T) {
 }
 
 func TestRendered(t *testing.T) {
-	child := newTemplate("child_template", "template contents", "call_name", Fields{})
-	parent := newTemplate("parent_template", "template contents", "call_name", Fields{})
+	child := NewTemplate("child_template", "template contents", "call_name", Fields{})
+	parent := NewTemplate("parent_template", "template contents", "call_name", Fields{})
 	parent.Children = []DirPathRenderer{child}
 	renderPath, err := ioutil.TempDir("", "")
 	if err != nil {
