@@ -1,7 +1,7 @@
 package scad
 
 import (
-	"github.com/micahkemp/scad/scad/internal"
+	"github.com/micahkemp/scad/pkg/scad/internal"
 	"io/ioutil"
 	"os"
 	"testing"

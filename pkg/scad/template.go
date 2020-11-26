@@ -3,7 +3,7 @@ package scad
 import (
 	"bytes"
 	"fmt"
-	"github.com/micahkemp/scad/scad/internal"
+	"github.com/micahkemp/scad/pkg/scad/internal"
 	"io/ioutil"
 	"log"
 	"os"
