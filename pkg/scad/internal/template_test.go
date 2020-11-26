@@ -1,7 +1,6 @@
-package scad
+package internal
 
 import (
-	"github.com/micahkemp/scad/pkg/scad/internal"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -13,13 +12,13 @@ func TestNew(t *testing.T) {
 
 	tests := []struct {
 		template string
-		fields   internal.Fields
+		fields   Fields
 		want     string
 	}{
-		{"no variables", internal.Fields{}, "no variables"},
-		{"{{ .Name.String }}", internal.Fields{}, testName},
-		{"{{ .CallName }}", internal.Fields{}, callName},
-		{"{{ .Fields.String }}", internal.NewFields(map[string]string{"fieldA": "valueA"}), "fieldA=valueA"},
+		{"no variables", Fields{}, "no variables"},
+		{"{{ .Name.String }}", Fields{}, testName},
+		{"{{ .CallName }}", Fields{}, callName},
+		{"{{ .Fields.String }}", NewFields(map[string]string{"fieldA": "valueA"}), "fieldA=valueA"},
 	}
 
 	for _, test := range tests {
@@ -36,8 +35,8 @@ func TestNew(t *testing.T) {
 }
 
 func TestRendered(t *testing.T) {
-	child := newTemplate("child_template", "template contents", "call_name", internal.Fields{})
-	parent := newTemplate("parent_template", "template contents", "call_name", internal.Fields{})
+	child := newTemplate("child_template", "template contents", "call_name", Fields{})
+	parent := newTemplate("parent_template", "template contents", "call_name", Fields{})
 	parent.Children = []DirPathRenderer{child}
 	renderPath, err := ioutil.TempDir("", "")
 	if err != nil {

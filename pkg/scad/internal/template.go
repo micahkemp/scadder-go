@@ -1,9 +1,8 @@
-package scad
+package internal
 
 import (
 	"bytes"
 	"fmt"
-	"github.com/micahkemp/scad/pkg/scad/internal"
 	"io/ioutil"
 	"log"
 	"os"
@@ -16,16 +15,16 @@ type DirPathRenderer interface {
 }
 
 type scadTemplate struct {
-	internal.Name
+	Name
 	template string
 	CallName string
-	Fields   internal.Fields
+	Fields   Fields
 	Children []DirPathRenderer
 }
 
-func newTemplate(name string, template string, callName string, fields internal.Fields, children ...DirPathRenderer) scadTemplate {
+func newTemplate(name string, template string, callName string, fields Fields, children ...DirPathRenderer) scadTemplate {
 	// TODO - need to handle potential error here
-	newName, _ := internal.NewName(name)
+	newName, _ := NewName(name)
 
 	return scadTemplate{
 		newName,
