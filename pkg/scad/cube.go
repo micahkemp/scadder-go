@@ -6,26 +6,26 @@ import (
 )
 
 type Cube struct {
-	Name string
+	Name    string
 	X, Y, Z float64
-	Center bool
+	Center  bool
 	internal.ScadTemplate
 }
 
 var CubeExample = Cube{
-	Name: "cube_example",
-	X: 10,
-	Y: 20,
-	Z: 30,
+	Name:   "cube_example",
+	X:      10,
+	Y:      20,
+	Z:      30,
 	Center: true,
 }
 
 func NewCube(name string, x, y, z float64, center bool) Cube {
 	cube := Cube{
-		Name: name,
-		X: x,
-		Y: y,
-		Z: z,
+		Name:   name,
+		X:      x,
+		Y:      y,
+		Z:      z,
 		Center: center,
 	}
 	cube.Initialize()
@@ -33,7 +33,7 @@ func NewCube(name string, x, y, z float64, center bool) Cube {
 	return cube
 }
 
-func (c* Cube) Initialize() {
+func (c *Cube) Initialize() {
 	n, _ := internal.FirstNonEmptyName(c.Name, "cube_component")
 	fields := internal.NewFields(map[string]string{
 		"size":   internal.ShortFloatList(c.X, c.Y, c.Z),
