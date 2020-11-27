@@ -1,6 +1,10 @@
 package internal
 
-import "log"
+import (
+	"fmt"
+	"log"
+	"path/filepath"
+)
 
 type Name struct {
 	Specified string
@@ -29,4 +33,16 @@ func (n Name) String() string {
 	}
 
 	return value
+}
+
+func (n Name) PathFrom(path string) string {
+	return filepath.Join(path, n.String())
+}
+
+func (n Name) SCADFileName() string {
+	return fmt.Sprintf("%s.scad", n.String())
+}
+
+func (n Name) SCADFilePath(path string) string {
+	return filepath.Join(path, n.SCADFileName())
 }
