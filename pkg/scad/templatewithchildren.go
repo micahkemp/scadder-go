@@ -11,7 +11,7 @@ func (t templateWithChildren) content() string {
 	return fmt.Sprintf("%s {%q}", t.template.content(), t.Children)
 }
 
-func (t templateWithChildren) Render(path string) {
+func (t templateWithChildren) render(path string) {
 	for _, child := range t.Children {
 		child.Render(t.PathFrom(path))
 	}

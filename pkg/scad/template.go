@@ -14,6 +14,6 @@ func (t template) content() string {
 	return fmt.Sprintf("%s: %s", t.Name, t.Fields)
 }
 
-func (t template) Render(path string) {
+func (t template) render(path string) {
 	fmt.Printf("%s - %s\n", t.Name.SCADFilePath(path), t.content())
 }

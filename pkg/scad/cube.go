@@ -19,5 +19,5 @@ func (c Cube) Render(path string) {
 	}
 
 	c.template.Fields = fmt.Sprintf("cube([%f, %f, %f, %v])", c.X, c.Y, c.Z, c.Center)
-	c.template.Render(path)
+	c.template.render(path)
 }

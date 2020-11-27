@@ -21,5 +21,5 @@ func (t Translate) Render(path string) {
 	t.template.Name = name
 	t.template.Fields = fmt.Sprintf("[%f, %f, %f]", t.X, t.Y, t.Z)
 	t.template.Children = t.Children
-	t.template.Render(path)
+	t.template.render(path)
 }
