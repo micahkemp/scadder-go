@@ -1,24 +1,25 @@
-package internal
+package scad
 
 import (
+	"github.com/micahkemp/scad/pkg/scad/internal"
 	"io/ioutil"
 	"os"
 	"testing"
 )
 
 func TestNew(t *testing.T) {
-	testName := "testName"
+	testName := name{"testName", ""}
 	callName := "callModule"
 
 	tests := []struct {
 		template string
-		fields   Fields
+		fields   internal.Fields
 		want     string
 	}{
-		{"no variables", Fields{}, "no variables"},
-		{"{{ .Name.String }}", Fields{}, testName},
-		{"{{ .CallName }}", Fields{}, callName},
-		{"{{ .Fields.String }}", NewFields(map[string]string{"fieldA": "valueA"}), "fieldA=valueA"},
+		{"no variables", internal.Fields{}, "no variables"},
+		{"{{ .Name.String }}", internal.Fields{}, testName.Value()},
+		{"{{ .CallName }}", internal.Fields{}, callName},
+		{"{{ .Fields.String }}", internal.NewFields(map[string]string{"fieldA": "valueA"}), "fieldA=valueA"},
 	}
 
 	for _, test := range tests {
@@ -35,8 +36,16 @@ func TestNew(t *testing.T) {
 }
 
 func TestRendered(t *testing.T) {
-	child := NewTemplate("child_template", "template contents", "call_name", Fields{})
-	parent := NewTemplate("parent_template", "template contents", "call_name", Fields{})
+	child := NewTemplate(
+		name{"child_template", ""},
+		"template contents",
+		"call_name",
+		internal.Fields{})
+	parent := NewTemplate(
+		name{"parent_template", ""},
+		"template contents",
+		"call_name",
+		internal.Fields{})
 	parent.children = []DirPathRenderer{child}
 	renderPath, err := ioutil.TempDir("", "")
 	if err != nil {

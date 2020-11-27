@@ -28,14 +28,14 @@ my_cube();
 	for _, test := range tests {
 		c := NewCube(test.n, test.x, test.y, test.z, test.center)
 
-		if c.String() != test.want {
+		if c.ScadTemplate.String() != test.want {
 			t.Errorf("NewCube(%s, %f, %f, %f, %t).String() = %s, want %s",
 				test.n,
 				test.x,
 				test.y,
 				test.z,
 				test.center,
-				c.String(),
+				c.ScadTemplate.String(),
 				test.want,
 			)
 		}

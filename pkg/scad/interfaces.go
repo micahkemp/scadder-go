@@ -1,5 +1,10 @@
 package scad
 
 type Initializer interface {
-	Initialize()
+Initialize()
+}
+
+type InitializerDirPathRenderer interface {
+Initializer
+DirPathRenderer
 }

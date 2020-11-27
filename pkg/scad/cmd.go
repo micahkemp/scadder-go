@@ -1,15 +1,17 @@
 package scad
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 )
 
 func ExampleToJSON(examples ExampleTypes) {
 	if len(os.Args) != 3 {
-		log.Fatalf("Usage: %s <type> <file>\n", os.Args[0])
+		log.Fatalf("Usage: %s <type> <output file>\n", os.Args[0])
 	}
 
 	componentType := os.Args[1]
@@ -33,4 +35,31 @@ func ExampleToJSON(examples ExampleTypes) {
 	if _, err = fmt.Fprintf(f, "%s\n", exampleJSON); err != nil {
 		log.Fatalf("(ExampleToJSON) %s: %s\n", filename, err)
 	}
+}
+
+func JSONToComponent(examples ExampleTypes) {
+	if len(os.Args) != 3 {
+		log.Fatalf("Usage: %s <type> <input file>\n", os.Args[0])
+	}
+
+	componentType := os.Args[1]
+	jsonFilename := os.Args[2]
+
+	jsonFileContents, err := ioutil.ReadFile(jsonFilename)
+	if err != nil {
+		log.Fatalf("input file (%s) error: %s", jsonFilename, err)
+	}
+
+	component := examples[componentType]
+
+	dec := json.NewDecoder(bytes.NewReader(jsonFileContents))
+	dec.DisallowUnknownFields()
+
+	err = dec.Decode(&component)
+	if err != nil {
+		log.Fatalf("JSON Error: %s", err)
+	}
+
+	component.Initialize()
+	component.Render(".")
 }

@@ -1,4 +1,4 @@
-package internal
+package scad
 
 import "testing"
 
@@ -21,31 +21,35 @@ func TestValid(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		if got := valid(test.input); got != test.want {
+		n := name{SpecifiedName: test.input}
+		if got := n.Valid(); got != test.want {
 			t.Errorf("Valid(%q) = %v", test.input, got)
 		}
 	}
+
+	n := name{}
+	if got := n.Valid(); got {
+		t.Errorf("Name{}.Valid() = %v", got)
+	}
 }
 
-func TestFirstNonEmptyName(t *testing.T) {
+func TestDefaultOrSpecified(t *testing.T) {
 	tests := []struct {
-		choices  []string
-		wantName string
-		wantOk   bool
+		name      name
+		wantValue string
 	}{
-		{[]string{"", "a"}, "a", false},
-		{[]string{"", "a", "aa", "bb", "cc"}, "a", false},
-		{[]string{"", "aa", "bb", "cc"}, "aa", true},
+		{name{"", "a"}, "a"},
+		{name{"a", ""}, "a"},
+		{name{"", ""}, ""},
 	}
 
 	for _, test := range tests {
-		if got, ok := FirstNonEmptyName(test.choices...); got != test.wantName || ok != test.wantOk {
-			t.Errorf("FirstNonEmptyName(%q) = (%q, %v), want (%q, %v)",
-				test.choices,
-				got,
-				ok,
-				test.wantName,
-				test.wantOk)
+		if test.name.Value() != test.wantValue {
+			t.Errorf("%q.Value() = %s, want %s",
+				test.name,
+				test.name.Value(),
+				test.wantValue)
+
 		}
 	}
 }
@@ -64,7 +68,7 @@ func TestFilenameFilePath(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		n, _ := NewName(test.name)
+		n := name{defaultName: test.name}
 		gotDirPath := n.DirPath(test.path)
 		gotFilename := n.Filename()
 		gotFilePath := n.FilePath(test.path)

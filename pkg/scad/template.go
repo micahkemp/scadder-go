@@ -1,8 +1,9 @@
-package internal
+package scad
 
 import (
 	"bytes"
 	"fmt"
+	"github.com/micahkemp/scad/pkg/scad/internal"
 	"io/ioutil"
 	"log"
 	"os"
@@ -15,19 +16,16 @@ type DirPathRenderer interface {
 }
 
 type ScadTemplate struct {
-	Name
+	name
 	template string
 	callName string
-	fields   Fields
+	fields   internal.Fields
 	children []DirPathRenderer
 }
 
-func NewTemplate(name string, template string, callName string, fields Fields, children ...DirPathRenderer) ScadTemplate {
-	// TODO - need to handle potential error here
-	newName, _ := NewName(name)
-
+func NewTemplate(name name, template string, callName string, fields internal.Fields, children ...DirPathRenderer) ScadTemplate {
 	return ScadTemplate{
-		newName,
+		name,
 		template,
 		callName,
 		fields,
@@ -39,12 +37,16 @@ func (t ScadTemplate) CallName() string {
 	return t.callName
 }
 
-func (t ScadTemplate) Fields() Fields {
+func (t ScadTemplate) Fields() internal.Fields {
 	return t.fields
 }
 
 func (t ScadTemplate) Children() []DirPathRenderer {
 	return t.children
+}
+
+func (t ScadTemplate) Name() name {
+	return t.name
 }
 
 func (t ScadTemplate) String() string {
@@ -58,7 +60,7 @@ func (t ScadTemplate) String() string {
 }
 
 func (t ScadTemplate) rendered(path string) bool {
-	contents, err := ioutil.ReadFile(t.Name.FilePath(path))
+	contents, err := ioutil.ReadFile(t.name.FilePath(path))
 
 	if err != nil {
 		// any error assumes not rendered
@@ -93,7 +95,7 @@ func (t ScadTemplate) Render(path string) (ok bool) {
 	}
 
 	// OpenFile used specifically to enforce not overwriting an existing file, but instead failing
-	f, err := os.OpenFile(t.Name.FilePath(path), os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0644)
+	f, err := os.OpenFile(t.name.FilePath(path), os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0644)
 	// TODO this needs to be handled properly
 	if err != nil {
 		fmt.Printf("(ScadTemplate) Render(%q): %s\n", path, err)
