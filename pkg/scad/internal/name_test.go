@@ -18,10 +18,10 @@ func TestName_Value(t *testing.T) {
 	for _, test := range tests {
 		name := Name{test.Specified, test.Default}
 
-		value, ok := name.Value()
+		value, ok := name.value()
 
 		if value != test.WantValue || ok != test.WantOK {
-			t.Errorf("Name{%q, %q}.Value() = (%q, %v), want (%q, %v)",
+			t.Errorf("Name{%q, %q}.value() = (%q, %v), want (%q, %v)",
 				test.Specified,
 				test.Default,
 				value,

@@ -11,7 +11,7 @@ type Name struct {
 	Default   string
 }
 
-func (n Name) Value() (value string, ok bool) {
+func (n Name) value() (value string, ok bool) {
 	value = n.Default
 	ok = true
 
@@ -27,7 +27,7 @@ func (n Name) Value() (value string, ok bool) {
 }
 
 func (n Name) String() string {
-	value, ok := n.Value()
+	value, ok := n.value()
 	if !ok {
 		log.Fatal("Attempted to stringify empty Name")
 	}
