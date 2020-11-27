@@ -8,7 +8,7 @@ import (
 type Union struct {
 	Name     string
 	Children []Renderer
-	template TemplateWithChildren
+	template templateWithChildren
 }
 
 func (u Union) Render(path string) {

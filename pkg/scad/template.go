@@ -5,29 +5,29 @@ import (
 	"github.com/micahkemp/scad/pkg/scad/internal"
 )
 
-type Template struct {
+type template struct {
 	internal.Name
 	Fields string
 }
 
-type TemplateWithChildren struct {
-	Template
+type templateWithChildren struct {
+	template
 	Children []Renderer
 }
 
-func (t Template) content() string {
+func (t template) content() string {
 	return fmt.Sprintf("%s: %s", t.Name, t.Fields)
 }
 
-func (t TemplateWithChildren) content() string {
-	return fmt.Sprintf("%s {%q}", t.Template.content(), t.Children)
+func (t templateWithChildren) content() string {
+	return fmt.Sprintf("%s {%q}", t.template.content(), t.Children)
 }
 
-func (t Template) Render(path string) {
+func (t template) Render(path string) {
 	fmt.Printf("%s - %s\n", t.Name.SCADFilePath(path), t.content())
 }
 
-func (t TemplateWithChildren) Render(path string) {
+func (t templateWithChildren) Render(path string) {
 	for _, child := range t.Children {
 		child.Render(t.PathFrom(path))
 	}

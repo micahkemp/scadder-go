@@ -9,7 +9,7 @@ type Cube struct {
 	Name     string
 	X, Y, Z  float64
 	Center   bool
-	template Template
+	template template
 }
 
 func (c Cube) Render(path string) {

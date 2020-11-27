@@ -9,7 +9,7 @@ type Translate struct {
 	Name     string
 	X, Y, Z  float64
 	Children []Renderer
-	template TemplateWithChildren
+	template templateWithChildren
 }
 
 func (t Translate) Render(path string) {
