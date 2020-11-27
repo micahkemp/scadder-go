@@ -24,7 +24,7 @@ func (d Dice) Render(path string) {
 
 	die2Translated := scad.Translate{
 		Name: "die2_translated",
-		X: d.Size + d.Offset,
+		X:    d.Size + d.Offset,
 		Children: []scad.Renderer{
 			die2,
 		},

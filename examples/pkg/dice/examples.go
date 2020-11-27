@@ -3,6 +3,6 @@ package dice
 import "github.com/micahkemp/scad/pkg/scad"
 
 var Examples = scad.ExampleTypes{
-	"die": &ExampleDie,
+	"die":  &ExampleDie,
 	"dice": &ExampleDice,
 }

@@ -15,7 +15,7 @@ type Translate struct {
 func (t Translate) Render(path string) {
 	name := internal.Name{
 		Specified: t.Name,
-		Default: "translate",
+		Default:   "translate",
 	}
 
 	t.template.Name = name
