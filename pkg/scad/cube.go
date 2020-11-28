@@ -18,7 +18,7 @@ func (c Cube) Render(path string) {
 	}
 
 	c.template.fields = fields{
-		"size": shortFloatList(c.X, c.Y, c.Z),
+		"size":   shortFloatList(c.X, c.Y, c.Z),
 		"center": strconv.FormatBool(c.Center),
 	}
 	c.template.render(path)
