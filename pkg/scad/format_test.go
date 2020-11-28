@@ -14,10 +14,10 @@ func TestShortFloat(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		got := ShortFloat(test.input)
+		got := shortFloat(test.input)
 
 		if got != test.want {
-			t.Errorf("ShortFloat(%f) = %s, want %s", test.input, got, test.want)
+			t.Errorf("shortFloat(%f) = %s, want %s", test.input, got, test.want)
 		}
 	}
 }
@@ -33,10 +33,10 @@ func TestShortFloatList(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		got := ShortFloatList(test.floats...)
+		got := shortFloatList(test.floats...)
 
 		if got != test.want {
-			t.Errorf("ShortFloatList(%v) = \"%s\", want \"%s\"", test.floats, got, test.want)
+			t.Errorf("shortFloatList(%v) = \"%s\", want \"%s\"", test.floats, got, test.want)
 		}
 	}
 }

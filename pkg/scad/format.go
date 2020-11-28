@@ -6,15 +6,15 @@ import (
 	"strings"
 )
 
-func ShortFloat(f float64) string {
+func shortFloat(f float64) string {
 	return strconv.FormatFloat(f, 'f', -1, 64)
 }
 
-func ShortFloatList(floats ...float64) string {
+func shortFloatList(floats ...float64) string {
 	var shortFloats []string
 
 	for _, f := range floats {
-		shortFloats = append(shortFloats, ShortFloat(f))
+		shortFloats = append(shortFloats, shortFloat(f))
 	}
 
 	return fmt.Sprintf("[%s]", strings.Join(shortFloats, ", "))
