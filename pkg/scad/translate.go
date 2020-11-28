@@ -22,3 +22,21 @@ func (t Translate) Render(path string) {
 	t.template.Children = t.Children
 	t.template.render(path)
 }
+
+func (r renderable) Translate(x, y, z float64) Translate {
+	return Translate{
+		X: x,
+		Y: y,
+		Z: z,
+		Children: []Renderer{
+			r.renderer,
+		},
+	}
+}
+
+func (r renderable) TranslateWithName(n string, x, y, z float64) Translate {
+	t := r.Translate(x, y, z)
+	t.Name = n
+
+	return t
+}

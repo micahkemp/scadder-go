@@ -21,3 +21,19 @@ func (u Union) Render(path string) {
 	u.template.Children = u.Children
 	u.template.render(path)
 }
+
+func (r renderable) Add(c ...Renderer) Union {
+	allChildren := append([]Renderer{r.renderer}, c...)
+
+	return Union{
+		Children: allChildren,
+	}
+}
+
+func (r renderable) AddWithName(n string, c ...Renderer) Union {
+	u := r.Add(c...)
+
+	u.Name = n
+
+	return u
+}

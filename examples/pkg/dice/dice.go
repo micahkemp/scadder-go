@@ -19,31 +19,16 @@ func (d Dice) Render(path string) {
 		Size: d.Size,
 	}
 
-	die2 := Die{
-		Name: "die2",
+	die2 := scad.Renderable(Die{
 		Size: d.Size,
-	}
-
-	die2Translated := scad.Translate{
-		Name: "die2_translated",
-		X:    d.Size + d.Offset,
-		Children: []scad.Renderer{
-			die2,
-		},
-	}
+	}).TranslateWithName("die2", d.Size, 0, 0)
 
 	name := scad.Name{
 		d.Name,
 		"dice",
 	}
 
-	dice := scad.Union{
-		Name: name.String(),
-		Children: []scad.Renderer{
-			die1,
-			die2Translated,
-		},
-	}
+	dice := scad.Renderable(die1).AddWithName(name.String(), die2)
 
 	dice.Render(".")
 }
