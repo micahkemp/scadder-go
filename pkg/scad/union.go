@@ -2,7 +2,6 @@ package scad
 
 import (
 	"fmt"
-	"github.com/micahkemp/scad/pkg/scad/internal"
 )
 
 type Union struct {
@@ -12,7 +11,7 @@ type Union struct {
 }
 
 func (u Union) Render(path string) {
-	name := internal.Name{
+	name := Name{
 		u.Name,
 		"union",
 	}

@@ -2,11 +2,10 @@ package scad
 
 import (
 	"fmt"
-	"github.com/micahkemp/scad/pkg/scad/internal"
 )
 
 type template struct {
-	internal.Name
+	Name
 	Fields string
 }
 

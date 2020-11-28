@@ -2,7 +2,6 @@ package scad
 
 import (
 	"fmt"
-	"github.com/micahkemp/scad/pkg/scad/internal"
 )
 
 type Translate struct {
@@ -13,7 +12,7 @@ type Translate struct {
 }
 
 func (t Translate) Render(path string) {
-	name := internal.Name{
+	name := Name{
 		Specified: t.Name,
 		Default:   "translate",
 	}

@@ -2,7 +2,6 @@ package scad
 
 import (
 	"fmt"
-	"github.com/micahkemp/scad/pkg/scad/internal"
 )
 
 type Cube struct {
@@ -13,7 +12,7 @@ type Cube struct {
 }
 
 func (c Cube) Render(path string) {
-	c.template.Name = internal.Name{
+	c.template.Name = Name{
 		Specified: c.Name,
 		Default:   "cube",
 	}
