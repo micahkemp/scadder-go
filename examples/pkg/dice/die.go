@@ -13,8 +13,13 @@ var ExampleDie = Die{
 }
 
 func (d Die) Render(path string) {
+	name := scad.Name{
+		d.Name,
+		"die",
+	}
+
 	cube := scad.Cube{
-		Name:   d.Name,
+		Name:   name.String(),
 		X:      d.Size,
 		Y:      d.Size,
 		Z:      d.Size,
