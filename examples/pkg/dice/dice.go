@@ -9,8 +9,9 @@ type Dice struct {
 }
 
 var ExampleDice = Dice{
-	Name: "example_dice",
-	Size: 10,
+	Name:   "example_dice",
+	Size:   10,
+	Offset: 5,
 }
 
 func (d Dice) Render(path string) {
@@ -21,7 +22,7 @@ func (d Dice) Render(path string) {
 
 	die2 := scad.Renderable(Die{
 		Size: d.Size,
-	}).TranslateWithName("die2", d.Size, 0, 0)
+	}).TranslateWithName("die2", d.Size+d.Offset, 0, 0)
 
 	name := scad.Name{
 		Specified: d.Name,
