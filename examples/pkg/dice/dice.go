@@ -24,8 +24,8 @@ func (d Dice) Render(path string) {
 	}).TranslateWithName("die2", d.Size, 0, 0)
 
 	name := scad.Name{
-		d.Name,
-		"dice",
+		Specified: d.Name,
+		Default:   "dice",
 	}
 
 	dice := scad.Renderable(die1).AddWithName(name.String(), die2)

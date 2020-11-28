@@ -16,7 +16,10 @@ func TestName_Value(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		name := Name{test.Specified, test.Default}
+		name := Name{
+			Specified: test.Specified,
+			Default:   test.Default,
+		}
 
 		value, ok := name.value()
 

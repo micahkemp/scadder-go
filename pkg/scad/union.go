@@ -12,8 +12,8 @@ type Union struct {
 
 func (u Union) Render(path string) {
 	name := Name{
-		u.Name,
-		"union",
+		Specified: u.Name,
+		Default:   "union",
 	}
 
 	u.template.Name = name
