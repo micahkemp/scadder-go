@@ -6,11 +6,11 @@ import (
 
 type template struct {
 	Name
-	Fields string
+	fields
 }
 
 func (t template) content() string {
-	return fmt.Sprintf("%s: %s", t.Name, t.Fields)
+	return fmt.Sprintf("%s: %q", t.Name, t.fields)
 }
 
 func (t template) render(path string) {

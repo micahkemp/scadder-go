@@ -1,7 +1,7 @@
 package scad
 
 import (
-	"fmt"
+	"strconv"
 )
 
 type Cube struct {
@@ -17,6 +17,9 @@ func (c Cube) Render(path string) {
 		Default:   "cube",
 	}
 
-	c.template.Fields = fmt.Sprintf("cube([%f, %f, %f, %v])", c.X, c.Y, c.Z, c.Center)
+	c.template.fields = fields{
+		"size": shortFloatList(c.X, c.Y, c.Z),
+		"center": strconv.FormatBool(c.Center),
+	}
 	c.template.render(path)
 }
