@@ -12,19 +12,15 @@ var ExampleDie = Die{
 	Size: 10,
 }
 
-func (d Die) Render(path string) {
-	name := scad.Name{
-		Specified: d.Name,
-		Default:   "die",
-	}
-
-	cube := scad.Cube{
-		Name:   name.String(),
+func (d Die) SCADWriter() scad.SCADWriter {
+	return scad.Cube{
+		Name: scad.Name{
+			Specified: d.Name,
+			Default:   "die",
+		}.String(),
 		X:      d.Size,
 		Y:      d.Size,
 		Z:      d.Size,
 		Center: false,
-	}
-
-	cube.Render(path)
+	}.SCADWriter()
 }

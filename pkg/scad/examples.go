@@ -1,3 +1,3 @@
 package scad
 
-type ExampleTypes map[string]Renderer
+type ExampleTypes map[string]Module

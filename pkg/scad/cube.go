@@ -5,21 +5,22 @@ import (
 )
 
 type Cube struct {
-	Name     string
-	X, Y, Z  float64
-	Center   bool
-	template template
+	Name    string
+	X, Y, Z float64
+	Center  bool
 }
 
-func (c Cube) Render(path string) {
-	c.template.Name = Name{
-		Specified: c.Name,
-		Default:   "cube",
+func (c Cube) SCADWriter() SCADWriter {
+	return SCADWriter{
+		Name: Name{
+			Specified: c.Name,
+			Default:   "cube",
+		},
+		Function:       "cube",
+		templateString: shapeTemplate,
+		Fields: fields{
+			"size":   shortFloatList(c.X, c.Y, c.Z),
+			"center": strconv.FormatBool(c.Center),
+		},
 	}
-
-	c.template.fields = fields{
-		"size":   shortFloatList(c.X, c.Y, c.Z),
-		"center": strconv.FormatBool(c.Center),
-	}
-	c.template.render(path)
 }

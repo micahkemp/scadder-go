@@ -2,31 +2,31 @@ package scad
 
 type Union struct {
 	Name     string
-	Children []Renderer
-	template templateWithChildren
+	Children []Module
 }
 
-func (u Union) Render(path string) {
-	name := Name{
-		Specified: u.Name,
-		Default:   "union",
+func (u Union) SCADWriter() SCADWriter {
+	return SCADWriter{
+		Name: Name{
+			Specified: u.Name,
+			Default:   "union",
+		},
+		templateString: transformationTemplate,
+		Function:       "union",
+		Children:       u.Children,
 	}
-
-	u.template.Name = name
-	u.template.Children = u.Children
-	u.template.render(path)
 }
 
-func (r renderable) Add(c ...Renderer) Union {
-	allChildren := append([]Renderer{r.renderer}, c...)
+func (t transformable) Add(c ...Module) Union {
+	allChildren := append([]Module{t.Module}, c...)
 
 	return Union{
 		Children: allChildren,
 	}
 }
 
-func (r renderable) AddWithName(n string, c ...Renderer) Union {
-	u := r.Add(c...)
+func (t transformable) AddWithName(n string, c ...Module) Union {
+	u := t.Add(c...)
 
 	u.Name = n
 

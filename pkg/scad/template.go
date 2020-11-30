@@ -1,18 +1,34 @@
 package scad
 
 import (
+	"bytes"
 	"fmt"
+	"log"
+	tt "text/template"
 )
 
-type template struct {
+type SCADWriter struct {
 	Name
-	fields
+	Function       string
+	Fields         fields
+	Children       []Module
+	templateString string
 }
 
-func (t template) content() string {
-	return fmt.Sprintf("%s: %q", t.Name, t.fields)
+func (t SCADWriter) content() string {
+	// our template's name is essentially a throwaway
+	templ := tt.Must(tt.New("scad").Parse(t.templateString))
+	buf := new(bytes.Buffer)
+	if err := templ.Execute(buf, t); err != nil {
+		log.Fatal(err)
+	}
+	return buf.String()
 }
 
-func (t template) render(path string) {
+func (t SCADWriter) WriteSCAD(path string) {
+	for _, child := range t.Children {
+		child.SCADWriter().WriteSCAD(t.PathFrom(path))
+	}
+
 	fmt.Printf("%s - %s\n", t.Name.SCADFilePath(path), t.content())
 }

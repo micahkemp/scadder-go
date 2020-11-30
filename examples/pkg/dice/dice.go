@@ -14,13 +14,13 @@ var ExampleDice = Dice{
 	Offset: 5,
 }
 
-func (d Dice) Render(path string) {
+func (d Dice) SCADWriter() scad.SCADWriter {
 	die1 := Die{
 		Name: "die1",
 		Size: d.Size,
 	}
 
-	die2 := scad.Renderable(Die{
+	die2 := scad.Transformable(Die{
 		Size: d.Size,
 	}).TranslateWithName("die2", d.Size+d.Offset, 0, 0)
 
@@ -29,7 +29,7 @@ func (d Dice) Render(path string) {
 		Default:   "dice",
 	}
 
-	dice := scad.Renderable(die1).AddWithName(name.String(), die2)
+	dice := scad.Transformable(die1).AddWithName(name.String(), die2)
 
-	dice.Render(".")
+	return dice.SCADWriter()
 }

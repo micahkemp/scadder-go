@@ -1,15 +1,15 @@
 package scad
 
-type Renderer interface {
-	Render(path string)
+type Module interface {
+	SCADWriter() SCADWriter
 }
 
-type renderable struct {
-	renderer Renderer
+type transformable struct {
+	Module
 }
 
-func Renderable(r Renderer) renderable {
-	return renderable{
-		r,
+func Transformable(m Module) transformable {
+	return transformable{
+		Module: m,
 	}
 }
