@@ -10,7 +10,7 @@ func (t Translate) SCADWriter() SCADWriter {
 	return SCADWriter{
 		Name: Name{
 			Specified: t.Name,
-			Default:   "translate",
+			Default:   "translate_module",
 		},
 		templateString: transformationTemplate,
 		Function:       "translate",

@@ -14,7 +14,7 @@ func (c Cube) SCADWriter() SCADWriter {
 	return SCADWriter{
 		Name: Name{
 			Specified: c.Name,
-			Default:   "cube",
+			Default:   "cube_module",
 		},
 		Function:       "cube",
 		templateString: shapeTemplate,

@@ -9,7 +9,7 @@ func (u Union) SCADWriter() SCADWriter {
 	return SCADWriter{
 		Name: Name{
 			Specified: u.Name,
-			Default:   "union",
+			Default:   "union_module",
 		},
 		templateString: transformationTemplate,
 		Function:       "union",

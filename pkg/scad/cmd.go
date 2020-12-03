@@ -63,5 +63,5 @@ func RenderFromJSONT(examples ExampleTypes) {
 		log.Fatalf("JSON Error: %s", err)
 	}
 
-	component.SCADWriter().WriteSCAD(".")
+	component.SCADWriter().WriteSCAD(componentType)
 }
