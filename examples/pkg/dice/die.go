@@ -13,7 +13,7 @@ var ExampleDie = Die{
 	Name:           "example_die",
 	Size:           50,
 	DimpleDiameter: 10,
-	DimpleDepth:    8,
+	DimpleDepth:    3,
 }
 
 func (d Die) SCADWriter() scad.SCADWriter {
