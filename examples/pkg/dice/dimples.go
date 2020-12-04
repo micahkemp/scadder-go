@@ -14,6 +14,9 @@ type Dimples struct {
 	Length float64
 }
 
+// spacingRatio, short because only used in DimplePositionsForCount
+const sR = 0.25
+
 var DimplePositionsForCount = []DimplePositions{
 	// 0
 	0: {},
@@ -23,38 +26,38 @@ var DimplePositionsForCount = []DimplePositions{
 	},
 	// 2
 	2: {
-		{-0.33, -0.33},
-		{0.33, 0.33},
+		{-sR, -sR},
+		{sR, sR},
 	},
 	// 3
 	3: {
-		{-0.33, -0.33},
+		{-sR, -sR},
 		{0, 0},
-		{0.33, 0.33},
+		{sR, sR},
 	},
 	// 4
 	4: {
-		{-0.33, -0.33},
-		{-0.33, 0.33},
-		{0.33, 0.33},
-		{0.33, -0.33},
+		{-sR, -sR},
+		{-sR, sR},
+		{sR, sR},
+		{sR, -sR},
 	},
 	// 5
 	5: {
-		{-0.33, -0.33},
-		{-0.33, 0.33},
+		{-sR, -sR},
+		{-sR, sR},
 		{0, 0},
-		{0.33, 0.33},
-		{0.33, -0.33},
+		{sR, sR},
+		{sR, -sR},
 	},
 	// 6
 	6: {
-		{-0.33, -0.33},
-		{-0.33, 0},
-		{-0.33, 0.33},
-		{0.33, 0.33},
-		{0.33, 0},
-		{0.33, -0.33},
+		{-sR, -sR},
+		{-sR, 0},
+		{-sR, sR},
+		{sR, sR},
+		{sR, 0},
+		{sR, -sR},
 	},
 }
 
@@ -62,7 +65,7 @@ func exampleDimplesWithCount(count int) Dimples {
 	return Dimples{
 		Dimple: Dimple{
 			Diameter: 10,
-			Depth:    8,
+			Depth:    3,
 		},
 		Length:          50,
 		DimplePositions: DimplePositionsForCount[count],
