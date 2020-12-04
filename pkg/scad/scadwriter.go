@@ -34,7 +34,8 @@ func (t SCADWriter) rendered(path string) bool {
 		return false
 	}
 
-	return string(contents) == t.String()
+
+	return string(contents) == t.content()
 }
 
 func (t SCADWriter) WriteSCAD(path string) {
