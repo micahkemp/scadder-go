@@ -14,62 +14,67 @@ type Dimples struct {
 	Length float64
 }
 
-var DimplePositions1 = DimplePositions{
-	{0, 0},
+var DimplePositionsForCount = []DimplePositions{
+	// 0
+	0: {},
+	// 1
+	1: {
+		{0, 0},
+	},
+	// 2
+	2: {
+		{-0.33, -0.33},
+		{0.33, 0.33},
+	},
+	// 3
+	3: {
+		{-0.33, -0.33},
+		{0, 0},
+		{0.33, 0.33},
+	},
+	// 4
+	4: {
+		{-0.33, -0.33},
+		{-0.33, 0.33},
+		{0.33, 0.33},
+		{0.33, -0.33},
+	},
+	// 5
+	5: {
+		{-0.33, -0.33},
+		{-0.33, 0.33},
+		{0, 0},
+		{0.33, 0.33},
+		{0.33, -0.33},
+	},
+	// 6
+	6: {
+		{-0.33, -0.33},
+		{-0.33, 0},
+		{-0.33, 0.33},
+		{0.33, 0.33},
+		{0.33, 0},
+		{0.33, -0.33},
+	},
 }
 
-var DimplePositions2 = DimplePositions{
-	{-0.33, -0.33},
-	{0.33, 0.33},
-}
-
-var DimplePositions3 = DimplePositions{
-	{-0.33, -0.33},
-	{0, 0},
-	{0.33, 0.33},
-}
-
-var DimplePositions4 = DimplePositions{
-	{-0.33, -0.33},
-	{-0.33, 0.33},
-	{0.33, 0.33},
-	{0.33, -0.33},
-}
-
-var DimplePositions5 = DimplePositions{
-	{-0.33, -0.33},
-	{-0.33, 0.33},
-	{0, 0},
-	{0.33, 0.33},
-	{0.33, -0.33},
-}
-
-var DimplePositions6 = DimplePositions{
-	{-0.33, -0.33},
-	{-0.33, 0},
-	{-0.33, 0.33},
-	{0.33, 0.33},
-	{0.33, 0},
-	{0.33, -0.33},
-}
-
-func exampleDimplesWithPositions(p DimplePositions) Dimples {
+func exampleDimplesWithCount(count int) Dimples {
 	return Dimples{
 		Dimple: Dimple{
 			Diameter: 10,
 			Depth:    8,
 		},
 		Length:          50,
-		DimplePositions: p,
+		DimplePositions: DimplePositionsForCount[count],
 	}
 }
 
-var ExampleDimples1 = exampleDimplesWithPositions(DimplePositions1)
-var ExampleDimples2 = exampleDimplesWithPositions(DimplePositions2)
-var ExampleDimples3 = exampleDimplesWithPositions(DimplePositions3)
-var ExampleDimples4 = exampleDimplesWithPositions(DimplePositions4)
-var ExampleDimples5 = exampleDimplesWithPositions(DimplePositions5)
-var ExampleDimples6 = exampleDimplesWithPositions(DimplePositions6)
+var ExampleDimples1 = exampleDimplesWithCount(1)
+var ExampleDimples2 = exampleDimplesWithCount(2)
+var ExampleDimples3 = exampleDimplesWithCount(3)
+var ExampleDimples4 = exampleDimplesWithCount(4)
+var ExampleDimples5 = exampleDimplesWithCount(5)
+var ExampleDimples6 = exampleDimplesWithCount(6)
 
 func (d Dimples) SCADWriter() scad.SCADWriter {
 	allDimples := make([]scad.Module, len(d.DimplePositions))
