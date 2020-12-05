@@ -9,17 +9,34 @@ import (
 	"os"
 )
 
-func ExampleToJSON(examples ExampleTypes) {
-	if len(os.Args) != 3 {
-		log.Fatalf("Usage: %s <type> <output file>\n", os.Args[0])
+func CLIHandler(models Models) {
+	if len(os.Args) != 4 {
+		log.Fatalf("Usage: %s exportJSON|renderJSON <model> <file>",
+			os.Args[0],
+		)
 	}
 
-	componentType := os.Args[1]
-	filename := os.Args[2]
+	action := os.Args[1]
+	modelName := os.Args[2]
+	fileName := os.Args[3]
 
-	example := examples[componentType]
+	model, ok := models[modelName]
+	if !ok {
+		log.Fatalf("Unknown model: %s", modelName)
+	}
 
-	exampleJSON, err := json.MarshalIndent(example, "", "  ")
+	switch action {
+	case "exportJSON":
+		exportJSON(model, fileName)
+	case "renderJSON":
+		renderJSON(model, fileName)
+	default:
+		log.Fatalf("Unknown action: %s", action)
+	}
+}
+
+func exportJSON(model Module, filename string) {
+	modelJSON, err := json.MarshalIndent(model, "", "  ")
 	if err != nil {
 		log.Fatalf("JSON marshal error: %s", err)
 	}
@@ -32,36 +49,24 @@ func ExampleToJSON(examples ExampleTypes) {
 
 	defer f.Close()
 
-	if _, err = fmt.Fprintf(f, "%s\n", exampleJSON); err != nil {
+	if _, err = fmt.Fprintf(f, "%s\n", modelJSON); err != nil {
 		log.Fatalf("(ExampleToJSON) %s: %s\n", filename, err)
 	}
 }
 
-func RenderFromJSONT(examples ExampleTypes) {
-	if len(os.Args) != 3 {
-		log.Fatalf("Usage: %s <type> <input file>\n", os.Args[0])
-	}
-
-	componentType := os.Args[1]
-	jsonFilename := os.Args[2]
-
-	jsonFileContents, err := ioutil.ReadFile(jsonFilename)
+func renderJSON(model Module, filename string) {
+	modelJSON, err := ioutil.ReadFile(filename)
 	if err != nil {
-		log.Fatalf("input file (%s) error: %s", jsonFilename, err)
+		log.Fatalf("input file (%s) error: %s", filename, err)
 	}
 
-	component, ok := examples[componentType]
-	if !ok {
-		log.Fatalf("type %s not known", componentType)
-	}
-
-	dec := json.NewDecoder(bytes.NewReader(jsonFileContents))
+	dec := json.NewDecoder(bytes.NewReader(modelJSON))
 	dec.DisallowUnknownFields()
 
-	err = dec.Decode(&component)
+	err = dec.Decode(&model)
 	if err != nil {
 		log.Fatalf("JSON Error: %s", err)
 	}
 
-	component.SCADWriter().WriteSCAD(componentType)
+	model.SCADWriter().WriteSCAD("output")
 }

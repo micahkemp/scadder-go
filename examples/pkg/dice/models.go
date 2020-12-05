@@ -2,7 +2,7 @@ package dice
 
 import "github.com/micahkemp/scad/pkg/scad"
 
-var Examples = scad.ExampleTypes{
+var Models = scad.Models{
 	"die":          &ExampleDie,
 	"dice":         &ExampleDice,
 	"dimple":       &ExampleDimple,

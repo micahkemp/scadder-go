@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	scad.ExampleToJSON(dice.Examples)
+	scad.CLIHandler(dice.Models)
 }
