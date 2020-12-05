@@ -1,39 +1,49 @@
 package dice
 
-import "github.com/micahkemp/scad/pkg/scad"
+import (
+	"fmt"
+	"github.com/micahkemp/scad/pkg/scad"
+)
 
 type Dice struct {
 	Name   string
-	Size   float64
+	Count  int
+	Die    Die
 	Offset float64
 }
 
 var ExampleDice = Dice{
-	Name:   "example_dice",
-	Size:   10,
+	Name:  "example_dice",
+	Count: 5,
+	Die: Die{
+		Size: 50,
+		Dimple: Dimple{
+			Diameter: 10,
+			Depth:    6,
+		},
+	},
 	Offset: 5,
 }
 
 func (d Dice) SCADWriter() scad.SCADWriter {
-	die1 := Die{
-		Name: "die1",
-		Size: d.Size,
-	}
+	translatedDice := make([]scad.Module, d.Count)
 
-	die2 := scad.TranslationWithName(
-		"die2",
-		d.Size+d.Offset,
-		0,
-		0,
-		Die{Size: d.Size},
-	)
+	for dieNumber, _ := range translatedDice {
+		translatedDice[dieNumber] = scad.TranslationWithName(
+			fmt.Sprintf("die_%d", dieNumber),
+			float64(dieNumber)*(d.Die.Size+d.Offset),
+			0,
+			0,
+			d.Die,
+		)
+	}
 
 	name := scad.Name{
 		Specified: d.Name,
 		Default:   "dice",
 	}
 
-	dice := scad.UnionWithName(name.String(), die1, die2)
+	dice := scad.UnionWithName(name.String(), translatedDice...)
 
 	return dice.SCADWriter()
 }

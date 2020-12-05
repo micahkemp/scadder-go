@@ -68,17 +68,18 @@ var SideTranslationByCount = []SideTranslation{
 }
 
 type SideDimples struct {
-	Name           string
-	SideLength     float64
-	DimpleDiameter float64
-	DimpleDepth    float64
+	Name       string
+	SideLength float64
+	Dimple     Dimple
 }
 
 var ExampleSideDimples = SideDimples{
-	Name:           "example_side_dimples",
-	SideLength:     50,
-	DimpleDiameter: 10,
-	DimpleDepth:    8,
+	Name:       "example_side_dimples",
+	SideLength: 50,
+	Dimple: Dimple{
+		Diameter: 10,
+		Depth:    8,
+	},
 }
 
 func (s SideDimples) SCADWriter() scad.SCADWriter {
@@ -88,8 +89,8 @@ func (s SideDimples) SCADWriter() scad.SCADWriter {
 		dimpleCount := sideNumber + 1
 		dimples := Dimples{
 			Dimple: Dimple{
-				Diameter: s.DimpleDiameter,
-				Depth:    s.DimpleDepth,
+				Diameter: s.Dimple.Diameter,
+				Depth:    s.Dimple.Depth,
 			},
 			Length:          s.SideLength,
 			DimplePositions: DimplePositionsForCount[dimpleCount],
