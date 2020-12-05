@@ -83,11 +83,12 @@ func (d Dimples) SCADWriter() scad.SCADWriter {
 	allDimples := make([]scad.Module, len(d.DimplePositions))
 
 	for dimpleNumber, dimplePosition := range d.DimplePositions {
-		allDimples[dimpleNumber] = scad.Transformable(d.Dimple).TranslateWithName(
+		allDimples[dimpleNumber] = scad.TranslationWithName(
 			fmt.Sprintf("dimple_%d", dimpleNumber),
 			d.Length*dimplePosition.X,
 			d.Length*dimplePosition.Y,
 			0,
+			d.Dimple,
 		)
 	}
 

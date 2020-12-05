@@ -23,19 +23,23 @@ func (r Rotate) SCADWriter() SCADWriter {
 	}
 }
 
-func (t transformable) Rotate(a, x, y, z float64) Rotate {
+func RotationOf(a, x, y, z float64, children ...Module) Rotate {
 	return Rotate{
 		Angle:    a,
 		X:        x,
 		Y:        y,
 		Z:        z,
-		Children: []Module{t},
+		Children: children,
 	}
 }
 
-func (t transformable) RotateWithName(n string, a, x, y, z float64) Rotate {
-	r := t.Rotate(a, x, y, z)
-	r.Name = n
-
-	return r
+func RotationWithName(name string, a, x, y, z float64, children ...Module) Rotate {
+	return Rotate{
+		Name:     name,
+		Angle:    a,
+		X:        x,
+		Y:        y,
+		Z:        z,
+		Children: children,
+	}
 }

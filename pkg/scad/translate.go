@@ -21,18 +21,21 @@ func (t Translate) SCADWriter() SCADWriter {
 	}
 }
 
-func (r transformable) Translate(x, y, z float64) Translate {
+func TranslationOf(x, y, z float64, children ...Module) Translate {
 	return Translate{
 		X:        x,
 		Y:        y,
 		Z:        z,
-		Children: []Module{r.Module},
+		Children: children,
 	}
 }
 
-func (r transformable) TranslateWithName(n string, x, y, z float64) Translate {
-	t := r.Translate(x, y, z)
-	t.Name = n
-
-	return t
+func TranslationWithName(name string, x, y, z float64, children ...Module) Translate {
+	return Translate{
+		Name:     name,
+		X:        x,
+		Y:        y,
+		Z:        z,
+		Children: children,
+	}
 }

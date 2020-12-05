@@ -17,16 +17,15 @@ func (d Difference) SCADWriter() SCADWriter {
 	}
 }
 
-func (t transformable) Subtract(c ...Module) Difference {
-	allChildren := append([]Module{t.Module}, c...)
-
+func DifferenceOf(children ...Module) Difference {
 	return Difference{
-		Children: allChildren,
+		Children: children,
 	}
 }
 
-func (t transformable) SubtractWithName(n string, c ...Module) Difference {
-	d := t.Subtract(c...)
-	d.Name = n
-	return d
+func DifferenceWithName(name string, children ...Module) Difference {
+	return Difference{
+		Name:     name,
+		Children: children,
+	}
 }

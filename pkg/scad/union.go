@@ -17,18 +17,15 @@ func (u Union) SCADWriter() SCADWriter {
 	}
 }
 
-func (t transformable) Add(c ...Module) Union {
-	allChildren := append([]Module{t.Module}, c...)
-
+func UnionOf(children ...Module) Union {
 	return Union{
-		Children: allChildren,
+		Children: children,
 	}
 }
 
-func (t transformable) AddWithName(n string, c ...Module) Union {
-	u := t.Add(c...)
-
-	u.Name = n
-
-	return u
+func UnionWithName(name string, children ...Module) Union {
+	return Union{
+		Name:     name,
+		Children: children,
+	}
 }

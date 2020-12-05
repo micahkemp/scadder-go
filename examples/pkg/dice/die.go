@@ -30,11 +30,12 @@ func (d Die) SCADWriter() scad.SCADWriter {
 		Center: true,
 	}
 
-	return scad.Transformable(cube).SubtractWithName(
+	return scad.DifferenceWithName(
 		scad.Name{
 			Specified: d.Name,
 			Default:   "die",
 		}.String(),
+		cube,
 		dimples,
 	).SCADWriter()
 }

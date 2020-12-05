@@ -15,13 +15,16 @@ var ExampleDimple = Dimple{
 }
 
 func (d Dimple) SCADWriter() scad.SCADWriter {
-	return scad.Transformable(scad.Sphere{
-		Diameter: d.Diameter,
-	}).TranslateWithName(
-		scad.Name{
-			Specified: d.Name,
-			Default:   "dimple",
-		}.String(),
+	name := scad.Name{
+		Specified: d.Name,
+		Default:   "dimple",
+	}
+
+	return scad.TranslationWithName(
+		name.String(),
 		0, 0, d.Depth-d.Diameter/2,
+		scad.Sphere{
+			Diameter: d.Diameter,
+		},
 	).SCADWriter()
 }

@@ -96,17 +96,19 @@ func (s SideDimples) SCADWriter() scad.SCADWriter {
 		}
 
 		sideTranslation := SideTranslationByCount[dimpleCount]
-		rotated := scad.Transformable(dimples).Rotate(
+		rotated := scad.RotationOf(
 			float64(sideTranslation.RotateAngle),
 			sideTranslation.RotateVector.X,
 			sideTranslation.RotateVector.Y,
 			sideTranslation.RotateVector.Z,
+			dimples,
 		)
-		translated := scad.Transformable(rotated).TranslateWithName(
+		translated := scad.TranslationWithName(
 			fmt.Sprintf("dimples_side_%d", sideNumber),
 			s.SideLength*sideTranslation.TranslateFactor.X,
 			s.SideLength*sideTranslation.TranslateFactor.Y,
 			s.SideLength*sideTranslation.TranslateFactor.Z,
+			rotated,
 		)
 
 		sideDimpleObjects[sideNumber] = translated

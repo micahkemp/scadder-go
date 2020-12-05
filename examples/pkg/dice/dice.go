@@ -20,16 +20,20 @@ func (d Dice) SCADWriter() scad.SCADWriter {
 		Size: d.Size,
 	}
 
-	die2 := scad.Transformable(Die{
-		Size: d.Size,
-	}).TranslateWithName("die2", d.Size+d.Offset, 0, 0)
+	die2 := scad.TranslationWithName(
+		"die2",
+		d.Size+d.Offset,
+		0,
+		0,
+		Die{Size: d.Size},
+	)
 
 	name := scad.Name{
 		Specified: d.Name,
 		Default:   "dice",
 	}
 
-	dice := scad.Transformable(die1).AddWithName(name.String(), die2)
+	dice := scad.UnionWithName(name.String(), die1, die2)
 
 	return dice.SCADWriter()
 }
