@@ -6,55 +6,55 @@ import (
 )
 
 type SideTranslation struct {
-	RotateVector    scad.XYZPoint
+	RotateVector    scad.XYZCoordinate
 	RotateAngle     int
-	TranslateFactor scad.XYZPoint
+	TranslateFactor scad.XYZCoordinate
 }
 
 // no translation
 var SideTranslationBottom = SideTranslation{
 	// down half height
-	TranslateFactor: scad.XYZPoint{Z: -0.5},
+	TranslateFactor: scad.XYZCoordinate{Z: -0.5},
 }
 
 var SideTranslationTop = SideTranslation{
 	// around X axis
-	RotateVector: scad.XYZPoint{X: 1},
+	RotateVector: scad.XYZCoordinate{X: 1},
 	RotateAngle:  180,
 	// up half height
-	TranslateFactor: scad.XYZPoint{Z: 0.5},
+	TranslateFactor: scad.XYZCoordinate{Z: 0.5},
 }
 
 var SideTranslationLeft = SideTranslation{
 	// around Y axis
-	RotateVector: scad.XYZPoint{Y: 1},
+	RotateVector: scad.XYZCoordinate{Y: 1},
 	RotateAngle:  90,
 	// left half height
-	TranslateFactor: scad.XYZPoint{X: -0.5},
+	TranslateFactor: scad.XYZCoordinate{X: -0.5},
 }
 
 var SideTranslationRight = SideTranslation{
 	// around Y axis, the other direction
-	RotateVector: scad.XYZPoint{Y: -1},
+	RotateVector: scad.XYZCoordinate{Y: -1},
 	RotateAngle:  90,
 	// right half height
-	TranslateFactor: scad.XYZPoint{X: 0.5},
+	TranslateFactor: scad.XYZCoordinate{X: 0.5},
 }
 
 var SideTranslationFront = SideTranslation{
 	// around X axis
-	RotateVector: scad.XYZPoint{X: -1},
+	RotateVector: scad.XYZCoordinate{X: -1},
 	RotateAngle:  90,
 	// towards front half height
-	TranslateFactor: scad.XYZPoint{Y: -0.5},
+	TranslateFactor: scad.XYZCoordinate{Y: -0.5},
 }
 
 var SideTranslationBack = SideTranslation{
 	// around X axis, the other direction
-	RotateVector: scad.XYZPoint{X: 1},
+	RotateVector: scad.XYZCoordinate{X: 1},
 	RotateAngle:  90,
 	// towards back half height
-	TranslateFactor: scad.XYZPoint{Y: 0.5},
+	TranslateFactor: scad.XYZCoordinate{Y: 0.5},
 }
 
 var SideTranslationByCount = []SideTranslation{

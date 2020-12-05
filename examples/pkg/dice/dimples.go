@@ -5,7 +5,7 @@ import (
 	"github.com/micahkemp/scad/pkg/scad"
 )
 
-type DimplePositions []scad.XYPoint
+type DimplePositions scad.XYCoordinates
 
 type Dimples struct {
 	Name string
