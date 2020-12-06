@@ -28,7 +28,7 @@ func (c Cylinder) setsRadius() bool {
 
 func (c Cylinder) validRadius() bool {
 	if (c.Radius != 0 && (c.Radius1 == 0 && c.Radius2 == 0)) ||
-		(c.Radius == 0 && (c.Radius1 != 0 && c.Radius2 != 0)) {
+		(c.Radius == 0 && (c.Radius1 != 0 || c.Radius2 != 0)) {
 		return true
 	}
 
@@ -65,7 +65,7 @@ func (c Cylinder) setsDiameter() bool {
 
 func (c Cylinder) validDiameter() bool {
 	if (c.Diameter != 0 && (c.Diameter1 == 0 && c.Diameter2 == 0)) ||
-		(c.Diameter == 0 && (c.Diameter1 != 0 && c.Diameter2 != 0)) {
+		(c.Diameter == 0 && (c.Diameter1 != 0 || c.Diameter2 != 0)) {
 		return true
 	}
 
@@ -75,8 +75,8 @@ func (c Cylinder) validDiameter() bool {
 func (c Cylinder) diameterMessage() string {
 	return fmt.Sprintf("Diameter %f, Diameter1 %f, Diameter2 %f",
 		c.Diameter,
-		c.Diameter,
-		c.Diameter)
+		c.Diameter1,
+		c.Diameter2)
 }
 
 func (c Cylinder) diameterFields() fields {

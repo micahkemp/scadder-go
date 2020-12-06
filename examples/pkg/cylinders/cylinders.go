@@ -12,7 +12,7 @@ var ExampleCylinderR1R2 = scad.Cylinder{
 	Name:    "cylinder_r1_r2",
 	Height:  20,
 	Radius1: 10,
-	Radius2: 5,
+	Radius2: 0,
 }
 
 var ExampleCylinderDiameter = scad.Cylinder{
@@ -25,5 +25,5 @@ var ExampleCylinderD1D2 = scad.Cylinder{
 	Name:      "cylinder_d1_d2",
 	Height:    20,
 	Diameter1: 10,
-	Diameter2: 5,
+	Diameter2: 0,
 }
