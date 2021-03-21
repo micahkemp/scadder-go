@@ -3,11 +3,12 @@ package scad
 // seenTracker keeps track of strings that have been seen.
 type seenTracker map[string]bool
 
-func (s seenTracker) trackPath(input string) (seen bool) {
+// trackSeen returns true if the string has already been seen.
+func (s seenTracker) trackSeen(input string) (seen bool) {
 	if s[input] {
-		return false
+		return true
 	}
 
 	s[input] = true
-	return true
+	return false
 }
