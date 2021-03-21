@@ -3,7 +3,7 @@ package scad
 import "testing"
 
 func TestField_SCADString(t *testing.T) {
-	tests := scadStringerTests{
+	tests := fieldFormatterTests{
 		{
 			field{
 				"fieldName",

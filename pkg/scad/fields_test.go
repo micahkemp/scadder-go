@@ -2,19 +2,19 @@ package scad
 
 import "testing"
 
-func TestFields_scadString(t *testing.T) {
-	tests := scadStringerTests{
+func TestFields_fieldsFormat(t *testing.T) {
+	tests := fieldsFormatterTests{
 		{
 			fields{
-				field{name: "includedField", isSetSCADStringer: ExplicitBool(false)},
+				field{name: "includedField", FieldValueFormatter: ExplicitBool(false)},
 			},
 			"includedField=false",
 		},
 		{
 			fields{
-				field{name: "skippedField", isSetSCADStringer: BoolWithExplicitness{}},
-				field{name: "includedField1", isSetSCADStringer: ExplicitBool(true)},
-				field{name: "includedField2", isSetSCADStringer: ExplicitFloat64(1)},
+				field{name: "skippedField", FieldValueFormatter: BoolWithExplicitness{}},
+				field{name: "includedField1", FieldValueFormatter: ExplicitBool(true)},
+				field{name: "includedField2", FieldValueFormatter: ExplicitFloat64(1)},
 			},
 			"includedField1=true, includedField2=1",
 		},

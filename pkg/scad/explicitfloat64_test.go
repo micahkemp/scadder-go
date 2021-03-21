@@ -3,7 +3,7 @@ package scad
 import "testing"
 
 func TestExplicitFloat64_scadString(t *testing.T) {
-	tests := scadStringerTests{
+	tests := fieldValueFormatterTests{
 		{
 			ExplicitFloat64(1),
 			"1",

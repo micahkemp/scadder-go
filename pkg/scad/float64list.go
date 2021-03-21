@@ -13,13 +13,13 @@ func (f Float64List) isSet() bool {
 	return len(f) > 0
 }
 
-// SCADString returns Float64List as a string suitable to use in OpenSCAD.
-func (f Float64List) scadString() string {
+// fieldValueFormat returns Float64List as a string suitable to use in OpenSCAD.
+func (f Float64List) fieldValueFormat() string {
 	valueStrings := make([]string, len(f))
 
 	for i, value := range f {
 		iExplicitFloat64 := ExplicitFloat64(value)
-		valueStrings[i] = iExplicitFloat64.scadString()
+		valueStrings[i] = iExplicitFloat64.fieldValueFormat()
 	}
 
 	allValuesString := strings.Join(valueStrings, ", ")
