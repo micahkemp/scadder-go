@@ -2,7 +2,7 @@ package scad
 
 import "testing"
 
-func TestExplicitFloat64_SCADString(t *testing.T) {
+func TestExplicitFloat64_scadString(t *testing.T) {
 	tests := scadStringerTests{
 		{
 			ExplicitFloat64(1),
