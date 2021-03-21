@@ -5,10 +5,10 @@ import "fmt"
 // field represents a key=value parameter to pass to OpenSCAD.
 type field struct {
 	name string
-	isSetStringer
+	isSetSCADStringer
 }
 
 // SCADString returns a string representation of a field suitable to use in OpenSCAD.
-func (f field) SCADString() string {
-	return fmt.Sprintf("%s=%s", f.name, f.isSetStringer.SCADString())
+func (f field) scadString() string {
+	return fmt.Sprintf("%s=%s", f.name, f.isSetSCADStringer.scadString())
 }
