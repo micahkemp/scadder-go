@@ -14,9 +14,5 @@ func TestExplicitFloat64_SCADString(t *testing.T) {
 		},
 	}
 
-	for _, test := range tests {
-		if test.input.SCADString() != test.want {
-			t.Errorf("%T{%+v}.SCADString() = %q, want %q", test.input, test.input, test.input.SCADString(), test.want)
-		}
-	}
+	tests.run(t)
 }

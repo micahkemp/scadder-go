@@ -1,6 +1,9 @@
 package scad
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 // scadStringerTest defines a test for a scadStringer.
 type scadStringerTest struct {
@@ -10,7 +13,11 @@ type scadStringerTest struct {
 
 // run performs the test defined by a scadStringerTest.
 func (s scadStringerTest) run(t *testing.T) {
-	if s.input.SCADString() != s.want {
-		t.Errorf("%T{%+v}.SCADString() = %q, want %q", s.input, s.input, s.input.SCADString(), s.want)
+	message := fmt.Sprintf("%T{%+v}.SCADString() = %q, want %q", s.input, s.input, s.input.SCADString(), s.want)
+	if s.input.SCADString() == s.want {
+		t.Log(message)
+	} else {
+		t.Errorf("!!!FAIL!!! %s", message)
+
 	}
 }
