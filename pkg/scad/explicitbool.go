@@ -16,7 +16,7 @@ func ExplicitBool(value bool) BoolWithExplicitness {
 	}
 }
 
-// SCADString returns a string representation of an explicitBool suitable for use in OpenSCAD.
-func (e BoolWithExplicitness) scadString() string {
+// fieldValueFormat returns a string representation of a BoolWithExplicitness suitable for use in OpenSCAD.
+func (e BoolWithExplicitness) fieldValueFormat() string {
 	return strconv.FormatBool(e.bool)
 }

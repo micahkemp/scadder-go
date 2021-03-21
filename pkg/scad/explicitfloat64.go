@@ -16,7 +16,7 @@ func ExplicitFloat64(value float64) Float64WithExplicitness {
 	}
 }
 
-// SCADString returns a string representation of an explicitBool suitable for use in OpenSCAD.
-func (f Float64WithExplicitness) scadString() string {
+// fieldValueFormat returns a string representation of a Float64WithExplicitness suitable for use in OpenSCAD.
+func (f Float64WithExplicitness) fieldValueFormat() string {
 	return strconv.FormatFloat(f.float64, 'f', -1, 64)
 }

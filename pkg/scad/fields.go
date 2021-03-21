@@ -16,13 +16,13 @@ func (f fields) isSet() bool {
 	return false
 }
 
-// scadString returns a string representation of fields suitable to use in a function call in OpenSCAD.
-func (f fields) scadString() string {
+// fieldsFormat returns a string representation of fields suitable to use in a function call in OpenSCAD.
+func (f fields) fieldsFormat() string {
 	fieldStrings := make([]string, 0)
 
 	for _, field := range f {
 		if field.isSet() {
-			fieldStrings = append(fieldStrings, field.scadString())
+			fieldStrings = append(fieldStrings, field.fieldFormat())
 		}
 	}
 
